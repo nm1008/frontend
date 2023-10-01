@@ -28,7 +28,15 @@ function Login() {
         }),
       })
         .then((res) => res.json())
-        .then((accessTokenData) => console.log(accessTokenData))
+        .then((data) => {
+          
+          if (data.accessToken){
+            localStorage.setItem("token", data.accessToken)
+          }
+
+        })
+
+        
     }
   }
 
