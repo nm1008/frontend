@@ -29,14 +29,24 @@ function Login() {
       })
         .then((res) => res.json())
         .then((data) => {
-          
-          if (data.accessToken){
-            localStorage.setItem("token", data.accessToken)
+          if (data.accessToken) {
+            localStorage.setItem("token", data.accessToken);
+
+            fetch("http://localhost:3000/api/users/details", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                email: email,
+              }),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                localStorage.setItem("isAdmin", data.isAdmin);
+              });
+          } else {
+            alert("Login Failed. Something went wrong");
           }
-
-        })
-
-        
+        });
     }
   }
 
