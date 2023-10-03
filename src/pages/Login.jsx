@@ -49,13 +49,15 @@ export function Login() {
         <input
           type="email"
           placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)} />
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
         <label> Password </label>
         <input
           type="password"
           placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)} />
+          onChange={(e) => setPassword(e.target.value)}
+        />
 
         <button onClick={handleLogin}>Sign in</button>
       </form>
