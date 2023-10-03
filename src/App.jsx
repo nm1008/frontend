@@ -1,26 +1,21 @@
 import "./App.css";
-import { Login } from "./components/Login";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { Login } from "./pages/Login";
+import { SBNavbar } from "./components/Navbar"
+
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <div className="app">
-      <Navbar />
+      <SBNavbar />
+     
       <Login />
     </div>
   );
 }
 
-function Navbar() {
-  return (
-    <>
-      <div>
-        <h1>Nav 1</h1>
-      </div>
-      <div>
-        <h1>Nav 2</h1>
-      </div>
-    </>
-  );
-}
 
 export default App;

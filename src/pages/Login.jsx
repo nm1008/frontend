@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 
 export function Login() {
@@ -42,7 +43,7 @@ export function Login() {
   }
 
   return (
-    <div>
+    <>
       <h1>Login</h1>
       <form action="POST">
         <label htmlFor="">Email </label>
@@ -61,6 +62,6 @@ export function Login() {
 
         <button onClick={handleLogin}>Sign in</button>
       </form>
-    </div>
+    </>
   );
 }
