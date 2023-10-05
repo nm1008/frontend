@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-  
+
     if (email === "" || password === "") {
       alert("Please input your email and/or password.");
     } else {
@@ -24,7 +24,7 @@ export default function Login() {
         .then((data) => {
           if (data.accessToken) {
             localStorage.setItem("token", data.accessToken);
-  
+
             fetch("http://localhost:3000/api/users/details", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -35,7 +35,7 @@ export default function Login() {
               .then((res) => res.json())
               .then((data) => {
                 localStorage.setItem("isAdmin", data.isAdmin);
-               navigate("/courses")
+                navigate("/courses");
               })
               .catch((error) => {
                 alert("Error fetching user details: " + error.message);
@@ -44,12 +44,11 @@ export default function Login() {
             alert("Login Failed. Something went wrong");
           }
         })
-        .catch((error) => {
-          alert("Login Failed");
+        .catch(() => {
+          alert("Incorrect details");
         });
     }
-  }
-  
+  };
 
   return (
     <div className="container mt-5 pt-5">
@@ -58,9 +57,9 @@ export default function Login() {
           <div className="card border-0 shadow">
             <div className="card-body">
               <h1 className="text-center">Login</h1>
-              <form action="">
+              <form action="" id="myForm">
                 <input
-                  type="text"   
+                  type="text"
                   className="form-control my-4 py-2"
                   placeholder="Username"
                   onChange={(e) => setEmail(e.target.value)}
@@ -72,7 +71,9 @@ export default function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <div className="text-center mt-3">
-                  <button onClick={handleLogin} className="btn btn-primary">Login</button>
+                  <button onClick={handleLogin} className="btn btn-primary">
+                    Login
+                  </button>
                   <a href="#" className="nav-link">
                     Already have an account ?
                   </a>

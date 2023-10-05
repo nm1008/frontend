@@ -1,7 +1,7 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-export default function Cards({ name, description}) {
+export default function Cards(name, description) {
   return (
     <Card style={{ width: "18rem" }}>
       <Card.Body>
