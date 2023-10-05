@@ -1,13 +1,12 @@
 import "./App.css";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import  Heading  from "./components/Navbar";
-import  Home  from "./pages/Home";
-import  Courses  from "./pages/Courses";
-import  Login  from "./pages/Login";
-import  Register  from "./pages/Register";
-
+import Heading from "./components/Navbar";
+import Home from "./pages/Home";
+import Courses from "./pages/Courses";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import EditProfile from "./pages/editProfile";
 
 import { Route, Routes } from "react-router-dom";
 
@@ -20,6 +19,7 @@ function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/EditProfile" element={<EditProfile />} />
       </Routes>
     </div>
   );

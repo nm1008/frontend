@@ -7,11 +7,12 @@ import Navbar from "react-bootstrap/Navbar";
 
 export default function Heading() {
   const [token, setToken] = useState(localStorage.getItem("token"));
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem(); // Remove the token from localStorage
-    setToken(null); // Set token state to null
+    localStorage.clear();
+    setToken(null);
     navigate("/");
   };
 
@@ -21,7 +22,7 @@ export default function Heading() {
     if (storedToken) {
       setToken(storedToken);
     }
-  }, [token]); // Empty dependency array to run the effect only once
+  }, [token]);
 
   return (
     <Navbar expand="lg" className="bg-primary">
@@ -40,9 +41,14 @@ export default function Heading() {
               Courses
             </Nav.Link>
             {token ? (
-              <Nav.Link onClick={handleLogout} className="text-white">
-                Logout
-              </Nav.Link>
+              <>
+                <Nav.Link as={Link} to="/editProfile" className="text-white">
+                  Edit Profile
+                </Nav.Link>
+                <Nav.Link onClick={handleLogout} className="text-white">
+                  Logout
+                </Nav.Link>
+              </>
             ) : (
               <>
                 <Nav.Link as={Link} to="/login" className="text-white">
