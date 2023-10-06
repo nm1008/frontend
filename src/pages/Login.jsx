@@ -9,6 +9,7 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
 
+
     if (email === "" || password === "") {
       alert("Please input your email and/or password.");
     } else {
@@ -71,12 +72,9 @@ export default function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <div className="text-center mt-3">
-                  <button onClick={handleLogin} className="btn btn-primary">
+                  <button onClick={handleLogin} className="btn btn-primary col-7">
                     Login
                   </button>
-                  <a href="#" className="nav-link">
-                    Already have an account ?
-                  </a>
                 </div>
               </form>
             </div>

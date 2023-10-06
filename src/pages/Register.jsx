@@ -48,11 +48,12 @@ export default function Register() {
               <h1 className="text-center">Register Page</h1>
               <form onSubmit={handleRegister}className="d-flex flex-column align-items-center gap-3">
                 <div>
-                  <label htmlFor="" className="fw-bold">
-                    Firstname:{" "}
+                  <label htmlFor="" className="fw-bold mb-2">
+                    Firstname
                   </label>
                   <br />
                   <input
+                    className="form-control-lg"
                     type="text"
                     placeholder="Enter your first name"
                     onChange={(e) => setFirstName(e.target.value)}
@@ -66,6 +67,7 @@ export default function Register() {
                   </label>
                   <br />
                   <input
+                    className="form-control-lg"
                     type="text"
                     placeholder="Enter your last name"
                     onChange={(e) => setLastName(e.target.value)}
@@ -79,6 +81,7 @@ export default function Register() {
                   </label>
                   <br />
                   <input
+                    className="form-control-lg"
                     type="email"
                     placeholder="Enter your email"
                     onChange={(e) => setEmail(e.target.value)}
@@ -92,6 +95,7 @@ export default function Register() {
                   </label>
                   <br />
                   <input
+                    className="form-control-lg"
                     type="password"
                     placeholder="Enter your Password"
                     minLength={8}
@@ -106,6 +110,7 @@ export default function Register() {
                   </label>
                   <br />
                   <input
+                    className="form-control-lg"
                     type="password"
                     placeholder="Confirm your Password"
                     minLength={8}
@@ -120,15 +125,16 @@ export default function Register() {
                   </label>
                   <br />
                   <input
+                    className="form-control-lg"
                     type="text"
-                    placeholder="Enter your mobile number"
+                    placeholder="Enter mobile number"
                     minLength="11"
                     maxLength="11"
                     onChange={(e) => setMobileNumber(e.target.value)}
                     required
                   />
                 </div>
-                <button className="btn btn-primary">Submit</button>
+                <button className="col-5 btn btn-primary">Submit</button>
               </form>
             </div>
           </div>
