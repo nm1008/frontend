@@ -36,6 +36,7 @@ export default function Login() {
               .then((res) => res.json())
               .then((data) => {
                 localStorage.setItem("isAdmin", data.isAdmin);
+                localStorage.setItem("_id", data._id)
                 navigate("/courses");
               })
               .catch((error) => {
