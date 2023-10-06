@@ -1,39 +1,45 @@
 import {} from "react-bootstrap";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function EditProfile() {
+  const id = localStorage.getItem("_id");
+  const token = localStorage.getItem("token");
 
-let id = localStorage.getItem("_id")
-let token = localStorage.getItem("token")
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
 
-const [firstName, setFirstName] = useState("")
-const [lastName, setLastName] = useState("")
-const [mobileNumber, setMobileNumber] = useState("")
+  const navigate = useNavigate();
 
-const handleEditUser = (e) => {
-  e.preventDefault()
+  const handleEditUser = (e) => {
+    e.preventDefault();
 
-  try{
-    fetch(`http://localhost:3000/api/users/${id}`, {
-      method:"PUT",
-      headers: {
-        'Content-Type': 'application/json',
-				'Authorization': `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        firstName: firstName,
-        lastName: lastName,
-        mobileNo: mobileNumber
-      })
-    })
-    .then((res) => res.json())
-    .then((data) => console.log(data))
-  }catch(err){
-    console.log(err)
-  }
-}
-
-
+    try {
+      fetch(`http://localhost:3000/api/users/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          firstName: firstName,
+          lastName: lastName,
+          mobileNo: mobileNumber,
+        }),
+      }).then((res) => {
+        if (res.ok) {
+          alert("Successfully updated information");
+          setFirstName("");
+          setLastName("");
+          setMobileNumber("");
+          navigate("/courses");
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="container my-5">
@@ -69,7 +75,9 @@ const handleEditUser = (e) => {
               onChange={(e) => setMobileNumber(e.target.value)}
             />
           </div>
-          <button className="col-md-6 col-sm-5 col-8 btn btn-primary">Submit</button>
+          <button className="col-md-6 col-sm-5 col-8 btn btn-primary">
+            Submit
+          </button>
         </div>
       </form>
     </div>
