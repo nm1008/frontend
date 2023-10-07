@@ -16,26 +16,30 @@ export default function EditProfile() {
     e.preventDefault();
 
     try {
-      fetch(`http://localhost:3000/api/users/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          firstName: firstName,
-          lastName: lastName,
-          mobileNo: mobileNumber,
-        }),
-      }).then((res) => {
-        if (res.ok) {
-          alert("Successfully updated information");
-          setFirstName("");
-          setLastName("");
-          setMobileNumber("");
-          navigate("/courses");
-        }
-      });
+      if (token) {
+        fetch(`http://localhost:3000/api/users/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            firstName: firstName,
+            lastName: lastName,
+            mobileNo: mobileNumber,
+          }),
+        }).then((res) => {
+          if (res.ok) {
+            alert("Successfully updated information");
+            setFirstName("");
+            setLastName("");
+            setMobileNumber("");
+            navigate("/courses");
+          }
+        });
+      }else{
+        navigate("/login")
+      }
     } catch (err) {
       console.log(err);
     }

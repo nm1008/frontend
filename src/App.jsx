@@ -1,6 +1,6 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import {} from 'react-bootstrap'
+import {} from "react-bootstrap";
 
 import Heading from "./components/Navbar";
 import Home from "./pages/Home";
@@ -8,7 +8,7 @@ import Courses from "./pages/Courses";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import EditProfile from "./pages/editProfile";
-import Footer from "./components/Footer"
+import Footer from "./components/Footer";
 
 import { Route, Routes } from "react-router-dom";
 

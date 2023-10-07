@@ -1,5 +1,6 @@
 import {} from "react-bootstrap";
 import { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [firstName, setFirstName] = useState("");
@@ -8,6 +9,8 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
+
+  const navigate = useNavigate();
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -28,9 +31,12 @@ export default function Register() {
             email: email,
             password: password,
           }),
-        })
-          .then((res) => res.json())
-          .then((data) => console.log(data));
+        }).then((res) => {
+          if (res.ok) {
+            alert("successfully registered");
+            navigate("/login");
+          }
+        });
       } catch (err) {
         console.log(err);
       }
@@ -46,7 +52,10 @@ export default function Register() {
           <div className="card border-0 shadow">
             <div className="card-body">
               <h1 className="text-center">Register Page</h1>
-              <form onSubmit={handleRegister}className="d-flex flex-column align-items-center gap-3">
+              <form
+                onSubmit={handleRegister}
+                className="d-flex flex-column align-items-center gap-3"
+              >
                 <div>
                   <label htmlFor="" className="fw-bold mb-2">
                     Firstname

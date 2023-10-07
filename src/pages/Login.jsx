@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-
 
     if (email === "" || password === "") {
       alert("Please input your email and/or password.");
@@ -36,7 +36,7 @@ export default function Login() {
               .then((res) => res.json())
               .then((data) => {
                 localStorage.setItem("isAdmin", data.isAdmin);
-                localStorage.setItem("_id", data._id)
+                localStorage.setItem("_id", data._id);
                 navigate("/courses");
               })
               .catch((error) => {
@@ -73,7 +73,10 @@ export default function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <div className="text-center mt-3">
-                  <button onClick={handleLogin} className="btn btn-primary col-7">
+                  <button
+                    onClick={handleLogin}
+                    className="btn btn-primary col-7"
+                  >
                     Login
                   </button>
                 </div>
