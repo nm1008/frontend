@@ -23,9 +23,9 @@ export default function Home() {
         </button>
       </div>
       <div className="d-flex gap-5 align=items-center justify-content-center m-5 pt-5">
-        {courses.map((course) => (
+        {courses.map((course, index) => (
           <Cards
-            key={course.id}
+            key={index}
             name={course.name}
             description={course.description}
           />
