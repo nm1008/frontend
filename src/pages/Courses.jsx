@@ -43,7 +43,7 @@ export default function Courses() {
         .then((res) => {
           if (res.status === 200) {
             alert("User enrolled successfully");
-          } else if (res.status === 400) {
+          } else if (res.status === 500) {
             alert("User is already enrolled in this course");
           } else {
             alert("Something went wrong");
