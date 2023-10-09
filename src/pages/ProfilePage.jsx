@@ -35,7 +35,7 @@ export default function ProfilePage() {
 
   return (
     <>
-      {isAdmin ? (
+      {isAdmin === true ? (
         <h4 className="text-center my-5">Not Available</h4>
       ) : (
         <div className="col-md-12">
