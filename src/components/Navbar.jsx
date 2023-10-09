@@ -42,8 +42,8 @@ export default function Heading() {
             </Nav.Link>
             {token ? (
               <>
-                <Nav.Link as={Link} to="/editProfile" className="text-white">
-                  Edit Profile
+                <Nav.Link as={Link} to="/ProfilePage" className="text-white">
+                  Profile
                 </Nav.Link>
                 <Nav.Link onClick={handleLogout} className="text-white">
                   Logout

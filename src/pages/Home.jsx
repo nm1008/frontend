@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Cards from "../components/Cards";
+import CardHome from "../components/CardHome";
 
 export default function Home() {
   const [courses, setCourses] = useState([]);
@@ -24,9 +24,10 @@ export default function Home() {
       </div>
       <div className="d-flex gap-5 align=items-center justify-content-center m-5 pt-5">
         {courses.map((course, index) => (
-          <Cards
+          <CardHome
             key={index}
             name={course.name}
+            price={course.price}
             description={course.description}
           />
         ))}

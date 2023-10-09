@@ -9,7 +9,7 @@ export default function ProfilePage() {
   const [lastName, setLastName] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [email, setEmail] = useState("");
-  const [courseList, setCourseList] = useState([]);
+//   const [courseList, setCourseList] = useState([]);
 
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ export default function ProfilePage() {
           setLastName(data.lastName);
           setMobileNumber(data.mobileNo);
           setEmail(data.email);
-          setCourseList(data.enrollments);
+        //   setCourseList(data.enrollments);
         });
     } catch (err) {
       console.log(err);
@@ -35,8 +35,8 @@ export default function ProfilePage() {
 
   return (
     <>
-      {!isAdmin ? (
-        <h4>Not Available</h4>
+      {isAdmin ? (
+        <h4 className="text-center my-5">Not Available</h4>
       ) : (
         <div className="col-md-12">
           <section className="text-center my-5">

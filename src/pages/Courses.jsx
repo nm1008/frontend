@@ -15,11 +15,7 @@ export default function Courses() {
     <>
       <div className="d-flex gap-5 align=items-center justify-content-center m-5 pt-5">
         {courses.map((course, index) => (
-          <Cards
-            key={index}
-            name={course.name}
-            price={course.price}
-          />
+          <Cards key={index} name={course.name} price={course.price} />
         ))}
       </div>
     </>
