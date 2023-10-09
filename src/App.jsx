@@ -9,6 +9,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import EditProfile from "./pages/editProfile";
 import Footer from "./components/Footer";
+import ProfilePage from "./pages/ProfilePage";
 
 import { Route, Routes } from "react-router-dom";
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/EditProfile" element={<EditProfile />} />
+        <Route path="/ProfilePage" element={<ProfilePage />} />
       </Routes>
       <Footer />
     </div>

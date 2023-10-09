@@ -37,6 +37,7 @@ export default function Login() {
               .then((data) => {
                 localStorage.setItem("isAdmin", data.isAdmin);
                 localStorage.setItem("_id", data._id);
+                
                 navigate("/courses");
               })
               .catch((error) => {
@@ -87,29 +88,4 @@ export default function Login() {
       </div>
     </div>
   );
-}
-
-{
-  /* <div className="d-flex align-items-center justify-content-center flex-column">
-      <h1 className="text-center">Login</h1>
-      <form action="POST" className="d-flex flex-column align-items-center justify-content-center">
-        <div>
-          <label htmlFor="">Email</label>
-          <input
-            type="email"
-            placeholder="Email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label> Password </label>
-          <input
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button onClick={handleLogin}>Sign in</button>
-      </form>
-    </div> */
 }
