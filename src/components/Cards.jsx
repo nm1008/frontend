@@ -1,8 +1,15 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
-
-export default function Cards({ id, name, description, price, onEnrollCourse, isAdmin }) {
+export default function Cards({
+  id,
+  name,
+  description,
+  price,
+  onEnrollCourse,
+  isAdmin,
+  editCoursePage,
+}) {
   return (
     <Card style={{ width: "20rem" }}>
       <Card.Body key={id}>
@@ -11,18 +18,19 @@ export default function Cards({ id, name, description, price, onEnrollCourse, is
         <Card.Text className="text-center">$ {price}</Card.Text>
         <div className="text-center">
           {isAdmin === "false" ? (
-               <Button className="btn btn-primary" onClick={onEnrollCourse}>Enroll</Button>
-          ):( 
-         
+            <Button className="btn btn-primary" onClick={onEnrollCourse}>
+              Enroll
+            </Button>
+          ) : (
             <div className="d-flex gap-2 justify-content-center">
-            <button className="btn btn-primary">Edit Course</button>
-            <button className="btn btn-danger">Delete Course</button>
-         </div>
-            )}
+              <button className="btn btn-primary" onClick={editCoursePage}>
+                Edit Course
+              </button>
+              <button className="btn btn-danger">Delete Course</button>
+            </div>
+          )}
         </div>
       </Card.Body>
-         
-        
     </Card>
   );
 }

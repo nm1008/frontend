@@ -21,7 +21,7 @@ export default function EditProfile() {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            "Authorization": `Bearer ${token}`,
           },
           body: JSON.stringify({
             firstName: firstName,

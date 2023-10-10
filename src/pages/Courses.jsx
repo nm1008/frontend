@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Cards from "../components/Cards";
 
 let isAdmin;
@@ -7,10 +8,12 @@ const token = localStorage.getItem("token");
 const id = localStorage.getItem("_id");
 
 export default function Courses() {
+
   const [courses, setCourses] = useState([]);
   const [userEmail, setUserEmail] = useState("");
-  //   console.log(courses);
 
+  const navigate = useNavigate()
+  
   useEffect(() => {
     fetch("http://localhost:3000/api/courses")
       .then((res) => res.json())
@@ -57,7 +60,11 @@ export default function Courses() {
       console.error(err);
     }
   };
-  
+
+  const editCoursePage = (courseId) => {
+    navigate("/EditCourse")
+    localStorage.setItem("courseId", courseId)
+  }
 
   return (
     <>
@@ -69,6 +76,7 @@ export default function Courses() {
             price={course.price}
             onEnrollCourse={() => handleEnrollCourse(course.name)}
             isAdmin={isAdmin}
+            editCoursePage={() => editCoursePage(course._id)}
           />
         ))}
       </div>
