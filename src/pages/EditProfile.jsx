@@ -21,7 +21,7 @@ export default function EditProfile() {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             firstName: firstName,
@@ -37,8 +37,8 @@ export default function EditProfile() {
             navigate("/courses");
           }
         });
-      }else{
-        navigate("/login")
+      } else {
+        navigate("/login");
       }
     } catch (err) {
       console.log(err);

@@ -9,8 +9,10 @@ export default function Cards({
   onEnrollCourse,
   isAdmin,
   editCoursePage,
+  onDeleteCourse
 }) {
   return (
+
     <Card style={{ width: "20rem" }}>
       <Card.Body key={id}>
         <Card.Title className="text-center">{name}</Card.Title>
@@ -26,7 +28,7 @@ export default function Cards({
               <button className="btn btn-primary" onClick={editCoursePage}>
                 Edit Course
               </button>
-              <button className="btn btn-danger">Delete Course</button>
+              <button className="btn btn-danger" onClick={onDeleteCourse}>Delete Course</button>
             </div>
           )}
         </div>

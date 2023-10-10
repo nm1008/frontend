@@ -10,6 +10,7 @@ import Register from "./pages/Register";
 import EditProfile from "./pages/editProfile";
 import Footer from "./components/Footer";
 import ProfilePage from "./pages/ProfilePage";
+import AddCourse from "./pages/AddCourse"
 import EditCourse from "./pages/EditCourse";
 
 import { Route, Routes } from "react-router-dom";
@@ -25,6 +26,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/EditProfile" element={<EditProfile />} />
         <Route path="/ProfilePage" element={<ProfilePage />} />
+        <Route path="/AddCourse" element={<AddCourse />}/>
         <Route path="/EditCourse" element={<EditCourse />}/>
       </Routes>
       <Footer />

@@ -26,12 +26,12 @@ export default function EditCourse() {
   const handleEditCourse = (e) => {
     e.preventDefault();
     const courseId = localStorage.getItem("courseId");
-    
+
     fetch(`http://localhost:3000/api/courses/${courseId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         name: courseName,

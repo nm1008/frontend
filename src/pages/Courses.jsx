@@ -8,12 +8,11 @@ const token = localStorage.getItem("token");
 const id = localStorage.getItem("_id");
 
 export default function Courses() {
-
   const [courses, setCourses] = useState([]);
   const [userEmail, setUserEmail] = useState("");
 
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
+
   useEffect(() => {
     fetch("http://localhost:3000/api/courses")
       .then((res) => res.json())
@@ -49,7 +48,7 @@ export default function Courses() {
           } else if (res.status === 400) {
             alert("User is already enrolled in this course");
           } else {
-            return
+            return;
           }
         })
         .catch((err) => {
@@ -61,13 +60,28 @@ export default function Courses() {
     }
   };
 
+  const handleAddCourse = () => {
+    navigate("/addCourse")
+  };
+
   const editCoursePage = (courseId) => {
-    navigate("/EditCourse")
-    localStorage.setItem("courseId", courseId)
-  }
+    navigate("/EditCourse");
+    localStorage.setItem("courseId", courseId);
+  };
+
+  const handleDeleteCourse = (courseId) => {
+    fetch;
+  };
 
   return (
     <>
+      <div className="text-center my-5">
+        {isAdmin === "true" ? (
+          <button className="btn btn-primary" onClick={handleAddCourse}>Add Course</button>
+        ) : (
+          <h1>Courses Page</h1>
+        )}
+      </div>
       <div className="d-flex gap-5 align=items-center justify-content-center m-5 pt-5">
         {courses.map((course, index) => (
           <Cards
@@ -77,6 +91,7 @@ export default function Courses() {
             onEnrollCourse={() => handleEnrollCourse(course.name)}
             isAdmin={isAdmin}
             editCoursePage={() => editCoursePage(course._id)}
+            onDeleteCourse={() => handleDeleteCourse(course._id)}
           />
         ))}
       </div>
