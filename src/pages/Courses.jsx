@@ -41,12 +41,12 @@ export default function Courses() {
         }),
       })
         .then((res) => {
-          if (res.status === 200) {
+          if (res.status === 201) {
             alert("User enrolled successfully");
-          } else if (res.status === 500) {
+          } else if (res.status === 400) {
             alert("User is already enrolled in this course");
           } else {
-            alert("Something went wrong");
+            return
           }
         })
         .catch((err) => {
