@@ -61,7 +61,7 @@ export default function Courses() {
   };
 
   const handleAddCourse = () => {
-    navigate("/addCourse")
+    navigate("/addCourse");
   };
 
   const editCoursePage = (courseId) => {
@@ -69,15 +69,31 @@ export default function Courses() {
     localStorage.setItem("courseId", courseId);
   };
 
-  const handleDeleteCourse = (courseId) => {
-    fetch;
+  const handleDeleteCourse = (course) => {
+    fetch(`http://localhost:3000/api/courses/${course._id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          alert(`${course.name} was deleted`);
+          window.location.reload(false);
+        } else {
+          alert("something went wrong");
+        }
+      });
   };
 
   return (
     <>
       <div className="text-center my-5">
         {isAdmin === "true" ? (
-          <button className="btn btn-primary" onClick={handleAddCourse}>Add Course</button>
+          <button className="btn btn-primary" onClick={handleAddCourse}>
+            Add Course
+          </button>
         ) : (
           <h1>Courses Page</h1>
         )}
@@ -91,7 +107,7 @@ export default function Courses() {
             onEnrollCourse={() => handleEnrollCourse(course.name)}
             isAdmin={isAdmin}
             editCoursePage={() => editCoursePage(course._id)}
-            onDeleteCourse={() => handleDeleteCourse(course._id)}
+            onDeleteCourse={() => handleDeleteCourse(course)}
           />
         ))}
       </div>

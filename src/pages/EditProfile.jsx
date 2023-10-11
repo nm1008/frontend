@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 export default function EditProfile() {
   const id = localStorage.getItem("_id");
   const token = localStorage.getItem("token");
+  const isAdmin = localStorage.getItem("isAdmin");
+  console.log(token)
+
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -46,44 +49,51 @@ export default function EditProfile() {
   };
 
   return (
-    <div className="container my-5">
-      <h2 className="text-center my-5">Edit Profile</h2>
-      <form action="" onSubmit={handleEditUser}>
-        <div className="d-flex flex-column align-items-center gap-3">
-          <div className="form-group col-md-6">
-            <label>First name</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter your first name"
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </div>
-          <div className="form-group col-md-6">
-            <label>Last name</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter your last name"
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </div>
-          <div className="form-group col-md-6">
-            <label>Mobile number</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter your mobile number"
-              maxLength={11}
-              minLength={11}
-              onChange={(e) => setMobileNumber(e.target.value)}
-            />
-          </div>
-          <button className="col-md-6 col-sm-5 col-8 btn btn-primary">
-            Submit
-          </button>
+    <>
+    {  console.log(isAdmin)}
+      {isAdmin ? (
+        <h1>This feature is not available</h1>
+      ) : (
+        <div className="container my-5">
+          <h2 className="text-center my-5">Edit Profile</h2>
+          <form action="" onSubmit={handleEditUser}>
+            <div className="d-flex flex-column align-items-center gap-3">
+              <div className="form-group col-md-6">
+                <label>First name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter your first name"
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </div>
+              <div className="form-group col-md-6">
+                <label>Last name</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter your last name"
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </div>
+              <div className="form-group col-md-6">
+                <label>Mobile number</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter your mobile number"
+                  maxLength={11}
+                  minLength={11}
+                  onChange={(e) => setMobileNumber(e.target.value)}
+                />
+              </div>
+              <button className="col-md-6 col-sm-5 col-8 btn btn-primary">
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
+      )}
+    </>
   );
 }

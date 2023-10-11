@@ -6,7 +6,11 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 export default function Heading() {
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState();
+
+  useEffect(() => {
+    setToken(localStorage.getItem('token'))
+  },[token])
 
   const navigate = useNavigate();
 
@@ -16,13 +20,7 @@ export default function Heading() {
     navigate("/");
   };
 
-  useEffect(() => {
-    // Check if there is a token in localStorage
-    const storedToken = localStorage.getItem("token");
-    if (storedToken) {
-      setToken(storedToken);
-    }
-  }, [token]);
+
 
   return (
     <Navbar expand="lg" className="bg-primary">

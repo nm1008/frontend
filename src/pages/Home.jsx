@@ -3,14 +3,21 @@ import CardHome from "../components/CardHome";
 
 export default function Home() {
   const [courses, setCourses] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // console.log(courses);
   useEffect(() => {
-    fetch("http://localhost:3000/api/courses")
-      .then((res) => res.json())
-      .then((data) => {
-        setCourses(data);
-      });
+    try {
+      setIsLoading(false)
+      fetch("http://localhost:3000/api/courses")
+        .then((res) => res.json())
+        .then((data) => {
+          setCourses(data);
+        });
+     
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
   return (
@@ -23,14 +30,20 @@ export default function Home() {
         </button>
       </div>
       <div className="d-flex gap-5 align=items-center justify-content-center m-5 pt-5">
-        {courses.map((course, index) => (
-          <CardHome
-            key={index}
-            name={course.name}
-            price={course.price}
-            description={course.description}
-          />
-        ))}
+        {isLoading ? (
+          <p>Fetching courses...</p>
+        ) : courses.length === 0 ? (
+          <h1>No Courses</h1>
+        ) : (
+          courses.map((course, index) => (
+            <CardHome
+              key={index}
+              name={course.name}
+              price={course.price}
+              description={course.description}
+            />
+          ))
+        )}
       </div>
     </>
   );
