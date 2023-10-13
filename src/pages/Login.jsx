@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -37,7 +37,7 @@ export default function Login() {
               .then((data) => {
                 localStorage.setItem("isAdmin", data.isAdmin);
                 localStorage.setItem("_id", data._id);
-                
+
                 navigate("/courses");
               })
               .catch((error) => {
@@ -52,6 +52,25 @@ export default function Login() {
         });
     }
   };
+
+  // const handleCallbackResponse = (res) => {
+  //   console.log(res.credential)
+  // };
+  
+  // useEffect(() => {
+  //   /* global google */
+  //   google.accounts.id.initialize({
+  //     client_id:
+  //       "719036231141-14ag8po3as4r28g1cpi2lcr0phjr1t0h.apps.googleusercontent.com",
+  //     callback: handleCallbackResponse,
+  //   });
+  
+  //   google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+  //     theme: "outline",
+  //     size: "large",
+  //   });
+  // }, []);
+  
 
   return (
     <div className="container mt-5 pt-5">
@@ -73,6 +92,10 @@ export default function Login() {
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <div className="text-center">
+                  <a href="/register">Not yet registered?</a>
+                </div>
+
                 <div className="text-center mt-3">
                   <button
                     onClick={handleLogin}
@@ -82,6 +105,7 @@ export default function Login() {
                   </button>
                 </div>
               </form>
+              <div id="signInDiv" className="my-5 col-12"></div>
             </div>
           </div>
         </div>

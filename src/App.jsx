@@ -7,10 +7,10 @@ import Home from "./pages/Home";
 import Courses from "./pages/Courses";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import EditProfile from "./pages/editProfile";
+import EditProfile from "./pages/EditProfile";
 import Footer from "./components/Footer";
 import ProfilePage from "./pages/ProfilePage";
-import AddCourse from "./pages/AddCourse"
+import AddCourse from "./pages/AddCourse";
 import EditCourse from "./pages/EditCourse";
 
 import { Route, Routes } from "react-router-dom";
@@ -26,8 +26,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/EditProfile" element={<EditProfile />} />
         <Route path="/ProfilePage" element={<ProfilePage />} />
-        <Route path="/AddCourse" element={<AddCourse />}/>
-        <Route path="/EditCourse" element={<EditCourse />}/>
+        <Route path="/AddCourse" element={<AddCourse />} />
+        <Route path="/EditCourse" element={<EditCourse />} />
       </Routes>
       <Footer />
     </div>
