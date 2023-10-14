@@ -5,21 +5,29 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
-import LoginModal from "../pages/LoginModal";
+import { useAuth } from "./auth";
 
 export default function Heading() {
-  const [token, setToken] = useState();
+  // const [token, setToken] = useState();
 
-  useEffect(() => {
-    setToken(localStorage.getItem("token"));
-  }, [token]);
+  const auth = useAuth()
+
+  // useEffect(() => {
+  //   const timeout = setInterval(() => {
+  //    setToken(localStorage.getItem("token"))
+  //   }, 500)
+  //   return () => {
+  //    clearInterval(timeout)
+  //   }
+  //  },[]);
 
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.clear();
-    setToken(null);
-    navigate("/login");
+    // setToken(null);
+    auth.logout()
+    navigate("/");
   };
 
   return (
@@ -32,32 +40,34 @@ export default function Heading() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto mx-5">
-            <Nav.Link as={Link} to="/" className="text-white">
+            {auth.user ? (
+              <Nav.Link as={Link} to="/courses" className="text-white">
               Home
             </Nav.Link>
+            ) : (
+              <Nav.Link as={Link} to="/" className="text-white">
+              Home
+            </Nav.Link>
+            )}
             <Nav.Link as={Link} to="#" className="text-white">
               About
             </Nav.Link>
             <Nav.Link as={Link} to="/courses" className="text-white">
               Courses
             </Nav.Link>
-            {token && (
-              <Nav.Link as={Link} to="/ProfilePage" className="text-white">
-                Profile
-              </Nav.Link>
+            {auth.user && (
+              <div className="d-flex gap-3">
+                <Nav.Link as={Link} to="/ProfilePage" className="text-white">
+                  Profile
+                </Nav.Link>
+                <Nav className="ms-auto ">
+                  <button className="btn btn-danger" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </Nav>
+              </div>
             )}
           </Nav>
-          {token ? (
-            <Nav className="ms-auto ">
-              <button className="btn btn-danger" onClick={handleLogout}>
-                Logout
-              </button>
-            </Nav>
-          ) : (
-            <Nav className="ms-auto">
-              <LoginModal />
-            </Nav>
-          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>

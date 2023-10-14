@@ -1,11 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../components/auth";
+
+import {} from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
+  const auth = useAuth()
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -37,7 +44,7 @@ export default function Login() {
               .then((data) => {
                 localStorage.setItem("isAdmin", data.isAdmin);
                 localStorage.setItem("_id", data._id);
-
+                auth.login(data)
                 navigate("/courses");
               })
               .catch((error) => {
@@ -56,7 +63,7 @@ export default function Login() {
   // const handleCallbackResponse = (res) => {
   //   console.log(res.credential)
   // };
-  
+
   // useEffect(() => {
   //   /* global google */
   //   google.accounts.id.initialize({
@@ -64,52 +71,49 @@ export default function Login() {
   //       "719036231141-14ag8po3as4r28g1cpi2lcr0phjr1t0h.apps.googleusercontent.com",
   //     callback: handleCallbackResponse,
   //   });
-  
+
   //   google.accounts.id.renderButton(document.getElementById("signInDiv"), {
   //     theme: "outline",
   //     size: "large",
   //   });
   // }, []);
-  
 
   return (
-    <div className="container mt-5 pt-5">
-      <div className="row">
-        <div className="col-12 col-sm-7 col-md-6 m-auto">
+    <Container className="mt-5 pt-5">
+      <Row>
+        <div className="col-12 col-md-7 col-sm-12 m-auto">
           <div className="card border-0 shadow">
             <div className="card-body">
-              <h1 className="text-center">Login</h1>
-              <form action="" id="myForm">
-                <input
-                  type="text"
-                  className="form-control my-4 py-2"
-                  placeholder="Username"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <input
-                  type="password"
-                  className="form-control my-4 py-2"
-                  placeholder="Password"
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                <div className="text-center">
-                  <a href="/register">Not yet registered?</a>
-                </div>
-
-                <div className="text-center mt-3">
-                  <button
-                    onClick={handleLogin}
-                    className="btn btn-primary col-7"
-                  >
-                    Login
-                  </button>
-                </div>
-              </form>
-              <div id="signInDiv" className="my-5 col-12"></div>
+              <h2 className="text-center">Login</h2>
+              <Form
+                className="d-flex flex-column gap-4 m-5"
+                onSubmit={handleLogin}
+              >
+                <Form.Group>
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter your email"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Enter your password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </Form.Group>
+                <button className="btn btn-primary">Login</button>
+              </Form>
+              <div className="d-flex justify-content-center">
+                <a href="/register">Not yet registered?</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 }

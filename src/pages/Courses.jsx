@@ -11,6 +11,7 @@ export default function Courses() {
   const [courses, setCourses] = useState([]);
   const [userEmail, setUserEmail] = useState("");
 
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,15 +20,13 @@ export default function Courses() {
       .then((data) => setCourses(data));
   }, []);
 
-  useEffect(() => {
-    isAdmin = localStorage.getItem("isAdmin");
-  });
+
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/users/${id}`)
       .then((res) => res.json())
       .then((data) => setUserEmail(data.email));
-  });
+  },[]);
 
   const handleEnrollCourse = (courseName) => {
     try {
