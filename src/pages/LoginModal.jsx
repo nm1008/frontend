@@ -9,7 +9,7 @@ export default function LoginModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleClose = () => setShow(false);
   const handleShow = (e) => {
@@ -47,7 +47,7 @@ export default function LoginModal() {
               .then((data) => {
                 localStorage.setItem("isAdmin", data.isAdmin);
                 localStorage.setItem("_id", data._id);
-                handleClose()
+                handleClose();
                 navigate("/courses");
               })
               .catch((error) => {
@@ -69,7 +69,7 @@ export default function LoginModal() {
         Login
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} className="my-5">
         <Modal.Header closeButton>
           <Modal.Title>Login</Modal.Title>
         </Modal.Header>
@@ -101,6 +101,11 @@ export default function LoginModal() {
             </Form.Group>
           </Form>
         </Modal.Body>
+        <Modal.Footer>
+          <a href="/register">
+            <p>Not yet registered?</p>
+          </a>
+        </Modal.Footer>
       </Modal>
     </>
   );

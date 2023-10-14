@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import CardHome from "../components/CardHome";
+import { TailSpin } from "react-loader-spinner";
 
 export default function Home() {
   const [courses, setCourses] = useState([]);
@@ -8,13 +9,12 @@ export default function Home() {
   // console.log(courses);
   useEffect(() => {
     try {
-      setIsLoading(false)
+      setIsLoading(false);
       fetch("http://localhost:3000/api/courses")
         .then((res) => res.json())
         .then((data) => {
           setCourses(data);
         });
-     
     } catch (err) {
       console.log(err);
     }
@@ -31,9 +31,16 @@ export default function Home() {
       </div>
       <div className="d-flex gap-5 align=items-center justify-content-center m-5 pt-5">
         {isLoading ? (
-          <p>Fetching courses...</p>
-        ) : courses.length === 0 ? (
-          <h1>No Courses</h1>
+          <TailSpin
+            height="80"
+            width="80"
+            color="#4fa94d"
+            ariaLabel="tail-spin-loading"
+            radius="1"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
         ) : (
           courses.map((course, index) => (
             <CardHome

@@ -9,7 +9,6 @@ import LoginModal from "../pages/LoginModal";
 
 export default function Heading() {
   const [token, setToken] = useState();
-  const [showLoginModal, setShowLoginModal] = useState(false);
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -20,7 +19,7 @@ export default function Heading() {
   const handleLogout = () => {
     localStorage.clear();
     setToken(null);
-    navigate("/");
+    navigate("/login");
   };
 
   return (
@@ -32,30 +31,27 @@ export default function Heading() {
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
+          <Nav className="ms-auto mx-5">
             <Nav.Link as={Link} to="/" className="text-white">
               Home
+            </Nav.Link>
+            <Nav.Link as={Link} to="#" className="text-white">
+              About
             </Nav.Link>
             <Nav.Link as={Link} to="/courses" className="text-white">
               Courses
             </Nav.Link>
-            {token ? (
-              <>
-                <Nav.Link as={Link} to="/ProfilePage" className="text-white">
-                  Profile
-                </Nav.Link>
-              </>
-            ) : (
-              <>
-                <Nav.Link as={Link} to="/register" className="text-white">
-                  Register
-                </Nav.Link>
-              </>
+            {token && (
+              <Nav.Link as={Link} to="/ProfilePage" className="text-white">
+                Profile
+              </Nav.Link>
             )}
           </Nav>
           {token ? (
-            <Nav className="ms-auto">
-             <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
+            <Nav className="ms-auto ">
+              <button className="btn btn-danger" onClick={handleLogout}>
+                Logout
+              </button>
             </Nav>
           ) : (
             <Nav className="ms-auto">
