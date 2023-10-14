@@ -1,6 +1,11 @@
-import {} from "react-bootstrap";
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import {} from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
 
 export default function Register() {
   const [firstName, setFirstName] = useState("");
@@ -46,109 +51,83 @@ export default function Register() {
   };
 
   return (
-    <div className="container mt-5 pt-5">
-      <div className="row">
-        <div className="col-12 col-md-6 col-sm-7 m-auto">
+    <Container className="mt-5 pt-5">
+      <Row>
+        <div className="col-12 col-md-7 col-sm-12 m-auto">
           <div className="card border-0 shadow">
             <div className="card-body">
-              <h1 className="text-center">Register Page</h1>
-              <form
+              <h2 className="text-center">Reigster</h2>
+              <Form
+                className="d-flex flex-column gap-4 m-5"
                 onSubmit={handleRegister}
-                className="d-flex flex-column align-items-center gap-3"
               >
-                <div>
-                  <label htmlFor="" className="fw-bold mb-2">
-                    Firstname
-                  </label>
-                  <br />
-                  <input
-                    className="form-control-lg"
-                    type="text"
-                    placeholder="Enter your first name"
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="" className="fw-bold">
-                    Lastname
-                  </label>
-                  <br />
-                  <input
-                    className="form-control-lg"
-                    type="text"
-                    placeholder="Enter your last name"
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="" className="fw-bold">
-                    Email Address
-                  </label>
-                  <br />
-                  <input
-                    className="form-control-lg"
+                <Form.Group>
+                  <Row>
+                    <Col>
+                      <Form.Label>First Name</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter your first name"
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required
+                        autoFocus
+                      />
+                    </Col>
+                    <Col>
+                      <Form.Label>Last Name</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter your first name"
+                        onChange={(e) => setLastName(e.target.value)}
+                        required
+                      />
+                    </Col>
+                  </Row>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Email Address</Form.Label>
+                  <Form.Control
                     type="email"
                     placeholder="Enter your email"
                     onChange={(e) => setEmail(e.target.value)}
                     required
                   />
-                </div>
-
-                <div>
-                  <label htmlFor="" className="fw-bold">
-                    Password
-                  </label>
-                  <br />
-                  <input
-                    className="form-control-lg"
-                    type="password"
-                    placeholder="Enter your Password"
-                    minLength={8}
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter your password"
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
-                </div>
-
-                <div>
-                  <label htmlFor="" className="fw-bold">
-                    Confirm Password
-                  </label>
-                  <br />
-                  <input
-                    className="form-control-lg"
-                    type="password"
-                    placeholder="Confirm your Password"
-                    minLength={8}
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Confirm your password"
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                   />
-                </div>
-
-                <div>
-                  <label htmlFor="" className="fw-bold">
-                    Mobile number
-                  </label>
-                  <br />
-                  <input
-                    className="form-control-lg"
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Mobile Number</Form.Label>
+                  <Form.Control
                     type="text"
-                    placeholder="Enter mobile number"
-                    minLength="11"
-                    maxLength="11"
+                    placeholder="Enter your mobile number"
                     onChange={(e) => setMobileNumber(e.target.value)}
                     required
                   />
-                </div>
-                <button className="col-5 btn btn-primary">Submit</button>
-              </form>
+                </Form.Group>
+                <Row>
+                  <button className="btn btn-primary">Sign up</button>
+                </Row>
+              </Form>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </Row>
+    </Container>
   );
 }

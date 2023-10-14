@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CardHome from "../components/CardHome";
 import { TailSpin } from "react-loader-spinner";
 
+
 export default function Home() {
   const [courses, setCourses] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
