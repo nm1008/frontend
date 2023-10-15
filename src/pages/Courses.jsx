@@ -58,7 +58,7 @@ export default function Courses() {
           alert("An error occurred");
         });
     } catch (err) {
-      console.error(err);
+      console.error(`this is the err ${err}`);
     }
   };
 

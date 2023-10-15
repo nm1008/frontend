@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TailSpin } from "react-loader-spinner";
+import CardCourse from "../components/CardCourse";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -11,11 +12,12 @@ export default function ProfilePage() {
   const [lastName, setLastName] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [email, setEmail] = useState("");
+  const [courses, setCourses] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
-  const isAdmin = localStorage.getItem("isAdmin")
+  const isAdmin = localStorage.getItem("isAdmin");
 
   useEffect(() => {
     try {
@@ -28,9 +30,18 @@ export default function ProfilePage() {
           setLastName(data.lastName);
           setMobileNumber(data.mobileNo);
           setEmail(data.email);
-          if (data) {
-            setIsLoading(false);
-          }
+
+          const coursePromises = data.enrollments.map((course) => {
+            return fetch(
+              `http://localhost:3000/api/courses/${course.courseId}`
+            ).then((res) => res.json());
+          });
+
+          Promise.all(coursePromises).then((courseData) => {
+            setCourses(courseData);
+          });
+
+          setIsLoading(false);
         });
     } catch (err) {
       console.log(err);
@@ -98,6 +109,20 @@ export default function ProfilePage() {
               </div>
             </div>
           </div>
+        </Row>
+      </Container>
+      <Container>
+        <Row>
+          {isAdmin === "false" && (
+            <>
+              <h2 className="text-center mt-5">Enrolled courses</h2>
+              <div className="d-flex justify-content-center gap-3 col-12 col-md-6 col-sm-6 m-auto ">
+                {courses.map((course, index) => (
+                  <CardCourse key={index} name={course.name} />
+                ))}
+              </div>
+            </>
+          )}
         </Row>
       </Container>
     </>

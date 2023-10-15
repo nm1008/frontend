@@ -39,7 +39,7 @@ export default function Register() {
         }).then((res) => {
           if (res.ok) {
             alert("successfully registered");
-            navigate("/login");
+            navigate("/");
           }
         });
       } catch (err) {
@@ -96,7 +96,7 @@ export default function Register() {
                 <Form.Group>
                   <Form.Label>Password</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="password"
                     placeholder="Enter your password"
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -105,7 +105,7 @@ export default function Register() {
                 <Form.Group>
                   <Form.Label>Confirm Password</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="password"
                     placeholder="Confirm your password"
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required

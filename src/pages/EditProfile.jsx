@@ -40,7 +40,7 @@ export default function EditProfile() {
             setFirstName("");
             setLastName("");
             setMobileNumber("");
-            navigate("/courses");
+            navigate("/ProfilePage");
           }
         });
       } else {
