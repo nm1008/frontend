@@ -2,31 +2,34 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cards from "../components/Cards";
 
-let isAdmin;
+
 
 const token = localStorage.getItem("token");
 const id = localStorage.getItem("_id");
 
+
 export default function Courses() {
   const [courses, setCourses] = useState([]);
   const [userEmail, setUserEmail] = useState("");
-
+  const [isAdmin, setIsAdmin] = useState(null)
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    
     fetch("http://localhost:3000/api/courses")
       .then((res) => res.json())
       .then((data) => setCourses(data));
   }, []);
 
-
-
   useEffect(() => {
     fetch(`http://localhost:3000/api/users/${id}`)
       .then((res) => res.json())
-      .then((data) => setUserEmail(data.email));
-  },[]);
+      .then((data) =>{
+        setUserEmail(data.email)
+        setIsAdmin(data.isAdmin)
+      });
+  }, []);
 
   const handleEnrollCourse = (courseName) => {
     try {
@@ -90,9 +93,12 @@ export default function Courses() {
     <>
       <div className="text-center my-5">
         {isAdmin === "true" ? (
-          <button className="btn btn-primary" onClick={handleAddCourse}>
-            Add Course
-          </button>
+          <>
+            <h1 className="mb-5">Courses Page</h1>
+            <button className="btn btn-primary" onClick={handleAddCourse}>
+              Add Course
+            </button>
+          </>
         ) : (
           <h1>Courses Page</h1>
         )}
@@ -104,7 +110,6 @@ export default function Courses() {
             name={course.name}
             price={course.price}
             onEnrollCourse={() => handleEnrollCourse(course.name)}
-            isAdmin={isAdmin}
             editCoursePage={() => editCoursePage(course._id)}
             onDeleteCourse={() => handleDeleteCourse(course)}
           />

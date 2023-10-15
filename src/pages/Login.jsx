@@ -12,7 +12,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-  const auth = useAuth()
+  const auth = useAuth();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -32,6 +32,7 @@ export default function Login() {
         .then((data) => {
           if (data.accessToken) {
             localStorage.setItem("token", data.accessToken);
+            auth.login(data.accessToken)
 
             fetch("http://localhost:3000/api/users/details", {
               method: "POST",
@@ -44,7 +45,7 @@ export default function Login() {
               .then((data) => {
                 localStorage.setItem("isAdmin", data.isAdmin);
                 localStorage.setItem("_id", data._id);
-                auth.login(data)
+                
                 navigate("/courses");
               })
               .catch((error) => {
@@ -59,24 +60,6 @@ export default function Login() {
         });
     }
   };
-
-  // const handleCallbackResponse = (res) => {
-  //   console.log(res.credential)
-  // };
-
-  // useEffect(() => {
-  //   /* global google */
-  //   google.accounts.id.initialize({
-  //     client_id:
-  //       "719036231141-14ag8po3as4r28g1cpi2lcr0phjr1t0h.apps.googleusercontent.com",
-  //     callback: handleCallbackResponse,
-  //   });
-
-  //   google.accounts.id.renderButton(document.getElementById("signInDiv"), {
-  //     theme: "outline",
-  //     size: "large",
-  //   });
-  // }, []);
 
   return (
     <Container className="mt-5 pt-5">
@@ -117,3 +100,21 @@ export default function Login() {
     </Container>
   );
 }
+
+// const handleCallbackResponse = (res) => {
+//   console.log(res.credential)
+// };
+
+// useEffect(() => {
+//   /* global google */
+//   google.accounts.id.initialize({
+//     client_id:
+//       "719036231141-14ag8po3as4r28g1cpi2lcr0phjr1t0h.apps.googleusercontent.com",
+//     callback: handleCallbackResponse,
+//   });
+
+//   google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+//     theme: "outline",
+//     size: "large",
+//   });
+// }, []);

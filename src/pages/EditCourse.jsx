@@ -52,7 +52,7 @@ export default function EditCourse() {
 
   return (
     <>
-      {isAdmin === true ? (
+      {isAdmin === "true" ? (
         <div className="container my-5">
           <h2 className="text-center my-5">Edit Course</h2>
           <form action="" onSubmit={handleEditCourse}>

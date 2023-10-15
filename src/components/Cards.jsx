@@ -7,12 +7,11 @@ export default function Cards({
   description,
   price,
   onEnrollCourse,
-  isAdmin,
   editCoursePage,
-  onDeleteCourse
+  onDeleteCourse,
 }) {
+  const isAdmin = localStorage.getItem("isAdmin");
   return (
-
     <Card style={{ width: "20rem" }}>
       <Card.Body key={id}>
         <Card.Title className="text-center">{name}</Card.Title>
@@ -28,7 +27,9 @@ export default function Cards({
               <button className="btn btn-primary" onClick={editCoursePage}>
                 Edit Course
               </button>
-              <button className="btn btn-danger" onClick={onDeleteCourse}>Delete Course</button>
+              <button className="btn btn-danger" onClick={onDeleteCourse}>
+                Delete Course
+              </button>
             </div>
           )}
         </div>
