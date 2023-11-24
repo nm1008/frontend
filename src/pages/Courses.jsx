@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Cards from "../components/Cards";
-
-
 
 const token = localStorage.getItem("token");
 const id = localStorage.getItem("_id");
-
 
 export default function Courses() {
   const [courses, setCourses] = useState([]);

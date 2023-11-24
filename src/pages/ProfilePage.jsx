@@ -4,11 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { TailSpin } from "react-loader-spinner";
 import CardCourse from "../components/CardCourse";
 
-//Styling
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
-
 export default function ProfilePage() {
   // States to store user information
   const [firstName, setFirstName] = useState("");
@@ -136,7 +131,7 @@ export default function ProfilePage() {
                 {/* Map the user's enrolled courses and render CardCourse components */}
                 {courses.map((course, index) => (
                   <CardCourse key={index} name={course.name} />
-                )}
+                ))}
               </div>
             </>
           )}

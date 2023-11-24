@@ -1,11 +1,5 @@
-import {} from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
 
 export default function EditProfile() {
   const id = localStorage.getItem("_id");

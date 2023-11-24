@@ -1,4 +1,4 @@
-import Card from "react-bootstrap/Card";
+
 
 export default function CardHome({ id, name, description, price}) {
   return (

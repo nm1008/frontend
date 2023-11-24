@@ -1,7 +1,7 @@
+import { useState, useEffect } from "react";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import {} from "react-bootstrap";
 
+//COMPONENTS
 import Heading from "./components/Navbar";
 import Courses from "./pages/Courses";
 import Login from "./pages/Login";
@@ -12,15 +12,41 @@ import ProfilePage from "./pages/ProfilePage";
 import AddCourse from "./pages/AddCourse";
 import EditCourse from "./pages/EditCourse";
 
+//ROUTES
 import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./components/auth";
 import RequireAuth from "./components/RequireAuth";
 
 function App() {
+
+  //DARK MODE
+  const [theme, setTheme] = useState(null);
+
+  useEffect(() => {
+    if (window.matchMedia("prefers-color-scheme: dark").matches) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
+
+  //FUNCTION TOGGLE DARK MODE BUTTON - PASSED TO NAVBAR
+  const handleThemeSwitch = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
   return (
-    <div className="app h-100">
+    <div className={`app h-100 ${theme === "dark" ? "bg-black" : "bg-slate-100"}`}>
       <AuthProvider>
-        <Heading />
+        <Heading theme={theme} handleThemeSwitch={handleThemeSwitch} />
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/courses" element={<Courses />} />
