@@ -1,13 +1,24 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import logo from "../assets/logo.png";
+
+//FONT AWESOME
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 export default function Register() {
+
+  //STATES
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
+
+  //SHOW PASSWORD
+  const [showPassword1, setShowPassword1] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
 
   const navigate = useNavigate();
 
@@ -44,84 +55,147 @@ export default function Register() {
     }
   };
 
+  //SHOW PASSWORD TOGGLE
+  const showPass1 = () => {
+    setShowPassword1(!showPassword1);
+  };
+
+  const showPass2 = () => {
+    setShowPassword2(!showPassword2);
+  };
+
   return (
-    <Container className="mt-5 pt-5">
-      <Row>
-        <div className="col-12 col-md-7 col-sm-12 m-auto">
-          <div className="card border-0 shadow">
-            <div className="card-body">
-              <h2 className="text-center">Reigster</h2>
-              <Form
-                className="d-flex flex-column gap-4 m-5"
-                onSubmit={handleRegister}
-              >
-                <Form.Group>
-                  <Row>
-                    <Col>
-                      <Form.Label>First Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter your first name"
-                        onChange={(e) => setFirstName(e.target.value)}
-                        required
-                        autoFocus
-                      />
-                    </Col>
-                    <Col>
-                      <Form.Label>Last Name</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Enter your first name"
-                        onChange={(e) => setLastName(e.target.value)}
-                        required
-                      />
-                    </Col>
-                  </Row>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Email Address</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Enter your email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Enter your password"
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Confirm Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    placeholder="Confirm your password"
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Mobile Number</Form.Label>
-                  <Form.Control
+    <section className="container mx-auto ">
+      <div className="h-screen flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 ">
+        <a
+          href="#"
+          className="text-black flex items-center mb-6 text-2xl font-semibold dark:text-white"
+        >
+          <img className="w-8 h-8 mr-2 " src={logo} alt="logo" />
+          Simply Book
+        </a>
+        <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
+              Create an account
+            </h1>
+            <form onSubmit={handleRegister}>
+              <div className="flex gap-2 items-center justify-between">
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    First Name
+                  </label>
+                  <input
                     type="text"
-                    placeholder="Enter your mobile number"
-                    onChange={(e) => setMobileNumber(e.target.value)}
+                    className="bg-gray-50 border  border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="John"
+                    onChange={(e) => setFirstName(e.target.value)}
                     required
                   />
-                </Form.Group>
-                <Row>
-                  <button className="btn btn-primary">Sign up</button>
-                </Row>
-              </Form>
-            </div>
+                </div>
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Last Name
+                  </label>
+                  <input
+                    type="text"
+                    className="bg-gray-50 border mt-2 border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Doe"
+                    onChange={(e) => setLastName(e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  className="bg-gray-50 border border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="name@company.com"
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="relative">
+                <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Password
+                </label>
+                <input
+                  type={showPassword1 ? "text" : "password"}
+                  className="bg-gray-50 border border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="••••••••"
+                  onChange={(e) => setPassword(e.target.value)}
+                  minLength={8}
+                  title="Minimum of 7 characters. Should have at least one special character and one number."
+                  pattern="(?=.*\d)(?=.*[\W_]).{7,}"
+                  required
+                />
+                <div className="absolute top-9 right-3">
+                  {showPassword1 ? (
+                    <FontAwesomeIcon icon={faEyeSlash} onClick={showPass1} />
+                  ) : (
+                    <FontAwesomeIcon icon={faEye} onClick={showPass1} />
+                  )}
+                </div>
+              </div>
+              <div className="relative">
+                <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Confirm Password
+                </label>
+                <input
+                  type={showPassword2 ? "text" : "password"}
+                  className="bg-gray-50 border border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="••••••••"
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  minLength={8}
+                  title="Minimum of 7 characters. Should have at least one special character and one number."
+                  pattern="(?=.*\d)(?=.*[\W_]).{7,}"
+                  required
+                />
+                <div className="absolute top-9 right-3">
+                  {showPassword2 ? (
+                    <FontAwesomeIcon icon={faEyeSlash} onClick={showPass2} />
+                  ) : (
+                    <FontAwesomeIcon icon={faEye} onClick={showPass2} />
+                  )}
+                </div>
+              </div>
+              <div>
+                <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">
+                  Phone Number
+                </label>
+                <input
+                  type="number"
+                  className="bg-gray-50 border border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="e.g. 8888-888-8888"
+                  onChange={(e) => setMobileNumber(e.target.value)}
+                  maxLength={11}
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="w-full mt-5 text-white bg-primary-600 bg-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Register
+              </button>
+              <p className="text-sm font-light text-gray-800 dark:text-gray-400 text-center mt-5">
+                Already have an account?{" "}
+                <a
+                  href="/register"
+                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                >
+                  Sign in
+                </a>
+              </p>
+            </form>
           </div>
         </div>
-      </Row>
-    </Container>
+      </div>
+    </section>
   );
 }

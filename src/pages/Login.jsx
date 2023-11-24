@@ -13,6 +13,7 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
 
+    //Checks the user input
     if (email === "" || password === "") {
       alert("Please input your email and/or password.");
     } else {
