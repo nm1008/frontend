@@ -66,7 +66,7 @@ export default function Courses() {
 
   const editCoursePage = (courseId) => {
     navigate("/EditCourse");
-    localStorage.setItem("courseId", courseId);
+    localStorage.setItem("courseId", courseId._id);
   };
 
   const handleDeleteCourse = (course) => {
@@ -97,27 +97,36 @@ export default function Courses() {
     <section className=" h-screen mx-3 my-5 ">
       <div className="text-center ">
         {isAdmin === true && (
-          <button className="m-2 px-12 py-2 bg-blue-500 rounded-md text-white font-bold w-34" onClick={handleAddCourse}>Add Course</button>
+          <button
+            className="m-2 px-12 py-2 bg-blue-500 rounded-md text-white font-bold w-34"
+            onClick={handleAddCourse}
+          >
+            Add Course
+          </button>
         )}
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2">
         {courses.map((data, i) => (
           <>
             <div key={data._id || i} className="mx-5 my-5 lg:mt-12">
-              <div  className="h-62 mb-5 block  mx-5 p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700  text-center">
+              <div className="h-62 mb-5 block  mx-5 p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700  text-center">
                 <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                   {data.name}
                 </h5>
                 <p className="font-normal text-gray-700  dark:text-gray-400">
                   {data.description}
                 </p>
-                {isAdmin === false && <p className="font-normal text-gray-700  dark:text-gray-400">$ {data.price}</p>}
+                {isAdmin === false && (
+                  <p className="font-normal text-gray-700  dark:text-gray-400">
+                    $ {data.price}
+                  </p>
+                )}
                 <div className="text-center flex flex-wrap items-center justify-center ">
                   {isAdmin === true ? (
                     <>
                       <button
                         className="m-2 px-12 py-2 bg-green-500 rounded-md text-white font-bold w-full"
-                        onClick={editCoursePage}
+                        onClick={() => editCoursePage(data)}
                       >
                         Edit Course
                       </button>

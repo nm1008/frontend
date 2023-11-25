@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
 
 const token = localStorage.getItem("token");
 const isAdmin = localStorage.getItem("isAdmin");
 
 export default function EditCourse() {
+  //STATES
   const [courseName, setCourseName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
 
   const navigate = useNavigate();
 
+  //GETTING THE CURRENT VALUE OF THE COURSE
   useEffect(() => {
     const courseId = localStorage.getItem("courseId");
 
@@ -25,7 +28,9 @@ export default function EditCourse() {
 
   const handleEditCourse = (e) => {
     e.preventDefault();
+
     const courseId = localStorage.getItem("courseId");
+    console.log(courseId);
 
     fetch(`http://localhost:3000/api/courses/${courseId}`, {
       method: "PUT",
@@ -53,45 +58,63 @@ export default function EditCourse() {
   return (
     <>
       {isAdmin === "true" ? (
-        <div className="container my-5">
-          <h2 className="text-center my-5">Edit Course</h2>
-          <form action="" onSubmit={handleEditCourse}>
-            <div className="d-flex flex-column align-items-center gap-3">
-              <div className="form-group col-md-6">
-                <label>Course Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={courseName}
-                  onChange={(e) => setCourseName(e.target.value)}
-                />
+        <section className="container mx-auto ">
+          <div className="h-screen flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 ">
+            <h1 className="text-black flex items-center mb-6 text-2xl font-semibold dark:text-white">
+              Edit course
+            </h1>
+            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+              <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <form action="" onSubmit={handleEditCourse}>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                      Title
+                    </label>
+                    <input
+                      type="text"
+                      className="mb-5 bg-gray-50 border border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="Javascript"
+                      value={courseName}
+                      onChange={(e) => setCourseName(e.target.value)}
+                      maxLength={30}
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                      Description
+                    </label>
+                    <input
+                      type="text"
+                      className="bg-gray-50 border border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="JavaScript is a versatile programming language."
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      maxLength={50}
+                    />
+                  </div>
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                      Price
+                    </label>
+                    <input
+                      type="number"
+                      className="bg-gray-50 border border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="69"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="flex gap-5 justify-center ">
+                    <Button>Edit Course</Button>
+                  </div>
+                </form>
               </div>
-              <div className="form-group col-md-6">
-                <label>Price</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                />
-              </div>
-              <div className="form-group col-md-6 h">
-                <label>Description</label>
-                <input
-                  type="text"
-                  className="form-control input-md"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </div>
-              <button className="col-md-6 col-sm-5 col-8 btn btn-primary">
-                Submit
-              </button>
             </div>
-          </form>
-        </div>
+          </div>
+        </section>
       ) : (
-        <div>This is feature is not available</div>
+        <h1>This is feature is not available</h1>
       )}
     </>
   );
