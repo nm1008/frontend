@@ -25,7 +25,7 @@ export default function Courses() {
         setUserEmail(data.email);
         setIsAdmin(data.isAdmin);
       });
-  }, []);
+  }, [isAdmin]);
 
   const handleEnrollCourse = (courseName) => {
     try {
@@ -89,7 +89,7 @@ export default function Courses() {
   return (
     <section className="container mx-auto ">
       <div className="h-screen flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 ">
-        <Button>Add Course</Button>
+      {isAdmin === true &&   <Button>Add Course</Button>}
       </div>
     </section>
   );

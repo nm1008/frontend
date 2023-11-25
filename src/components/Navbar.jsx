@@ -31,7 +31,7 @@ export default function Heading({ theme, handleThemeSwitch }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // setToken(null);
+    localStorage.clear();
     auth.logout();
     navigate("/");
   };
@@ -54,7 +54,7 @@ export default function Heading({ theme, handleThemeSwitch }) {
             <div className="flex items-center gap-2 ">
               <img src={logo} alt="logo" className="w-12" />
               <a
-                href="#"
+                href="/home"
                 className="text-black font-semibold dark:text-white dark:font-bolder"
               >
                 Simply Book
@@ -84,12 +84,6 @@ export default function Heading({ theme, handleThemeSwitch }) {
                     <ul className="flex">
                       <li className={navlinkStyle}>
                         <Link to="/">Home</Link>
-                      </li>
-                      <li className={navlinkStyle}>
-                        <Link to="/courses">Courses</Link>
-                      </li>
-                      <li className={navlinkStyle}>
-                        <Link to="/ProfilePage">Profile</Link>
                       </li>
                       <li className={navlinkStyle}>
                         <Link to="/Login">Login</Link>
@@ -174,12 +168,6 @@ export default function Heading({ theme, handleThemeSwitch }) {
                 <ul className="flex flex-col items-center">
                   <li className={navlinkStyle}>
                     <Link to="/">Home</Link>
-                  </li>
-                  <li className={navlinkStyle}>
-                    <Link to="/courses">Courses</Link>
-                  </li>
-                  <li className={navlinkStyle}>
-                    <Link to="/ProfilePage">Profile</Link>
                   </li>
                   <li className={navlinkStyle}>
                     <Link to="/Login">Login</Link>

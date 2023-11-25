@@ -16,9 +16,9 @@ import EditCourse from "./pages/EditCourse";
 import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./components/auth";
 import RequireAuth from "./components/RequireAuth";
+import Home from "./pages/Home";
 
 function App() {
-
   //DARK MODE
   const [theme, setTheme] = useState(null);
 
@@ -44,18 +44,28 @@ function App() {
   };
 
   return (
-    <div className={`app h-100 ${theme === "dark" ? "bg-black" : "bg-slate-100"}`}>
+    <div
+      className={`app h-100 ${theme === "dark" ? "bg-black" : "bg-slate-100"}`}
+    >
       <AuthProvider>
         <Heading theme={theme} handleThemeSwitch={handleThemeSwitch} />
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/courses" element={<Courses />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
             path="/EditProfile"
             element={
               <RequireAuth>
                 <EditProfile />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/courses"
+            element={
+              <RequireAuth>
+                <Courses />
               </RequireAuth>
             }
           />
@@ -67,8 +77,22 @@ function App() {
               </RequireAuth>
             }
           />
-          <Route path="/AddCourse" element={<AddCourse />} />
-          <Route path="/EditCourse" element={<EditCourse />} />
+          <Route
+            path="/AddCourse"
+            element={
+              <RequireAuth>
+                <AddCourse />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/EditCourse"
+            element={
+              <RequireAuth>
+                <EditCourse />
+              </RequireAuth>
+            }
+          />
         </Routes>
         <Footer />
       </AuthProvider>
