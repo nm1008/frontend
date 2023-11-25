@@ -63,18 +63,40 @@ export default function Heading({ theme, handleThemeSwitch }) {
             <div className="hidden md:block">
               <div className="ml-10 flex items-baseline space-x-4">
                 <div className="flex gap-3">
-                  <div className={navlinkStyle}>
-                    <Link to="/">Home</Link>
-                  </div>
-                  <div className={navlinkStyle}>
-                    <Link to="/courses">Courses</Link>
-                  </div>
-                  <div className={navlinkStyle}>
-                    <Link to="/ProfilePage">Profile</Link>
-                  </div>
-                  <div className={navlinkStyle}>
-                    <Link to="/Login">Login</Link>
-                  </div>
+                  {auth.token ? (
+                    <ul className="flex">
+                      <li className={navlinkStyle}>
+                        <Link to="/">Home</Link>
+                      </li>
+                      <li className={navlinkStyle}>
+                        <Link to="/courses">Courses</Link>
+                      </li>
+                      <li className={navlinkStyle}>
+                        <Link to="/ProfilePage">Profile</Link>
+                      </li>
+                      <li className={navlinkStyle}>
+                        <Link to="/" onClick={handleLogout}>
+                          Logout
+                        </Link>
+                      </li>
+                    </ul>
+                  ) : (
+                    <ul className="flex">
+                      <li className={navlinkStyle}>
+                        <Link to="/">Home</Link>
+                      </li>
+                      <li className={navlinkStyle}>
+                        <Link to="/courses">Courses</Link>
+                      </li>
+                      <li className={navlinkStyle}>
+                        <Link to="/ProfilePage">Profile</Link>
+                      </li>
+                      <li className={navlinkStyle}>
+                        <Link to="/Login">Login</Link>
+                      </li>
+                    </ul>
+                  )}
+
                   <div className={navlinkStyle}>
                     {theme === "dark" ? (
                       <FontAwesomeIcon
@@ -97,7 +119,7 @@ export default function Heading({ theme, handleThemeSwitch }) {
             {/* HAMBURGER MENU */}
 
             <div className="mr-2 flex items-center gap-5 md:hidden">
-            {theme === "dark" ? (
+              {theme === "dark" ? (
                 <FontAwesomeIcon
                   icon={faSun}
                   size="lg"
@@ -131,20 +153,39 @@ export default function Heading({ theme, handleThemeSwitch }) {
         {open ? (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 ">
-              <div className="text-center ">
-                <div className={navlinkMobile}>
-                  <Link to="/">Home</Link>
-                </div>
-                <div className={navlinkMobile}>
-                  <Link to="/">Courses</Link>
-                </div>
-                <div className={navlinkMobile}>
-                  <Link to="/">Profile</Link>
-                </div>
-                <div className={navlinkMobile}>
-                  <Link to="/">Login</Link>
-                </div>
-              </div>
+              {auth.token ? (
+                <ul className="flex flex-col items-center">
+                  <li className={navlinkStyle}>
+                    <Link to="/">Home</Link>
+                  </li>
+                  <li className={navlinkStyle}>
+                    <Link to="/courses">Courses</Link>
+                  </li>
+                  <li className={navlinkStyle}>
+                    <Link to="/ProfilePage">Profile</Link>
+                  </li>
+                  <li className={navlinkStyle}>
+                    <Link to="/" onClick={handleLogout}>
+                      Logout
+                    </Link>
+                  </li>
+                </ul>
+              ) : (
+                <ul className="flex flex-col items-center">
+                  <li className={navlinkStyle}>
+                    <Link to="/">Home</Link>
+                  </li>
+                  <li className={navlinkStyle}>
+                    <Link to="/courses">Courses</Link>
+                  </li>
+                  <li className={navlinkStyle}>
+                    <Link to="/ProfilePage">Profile</Link>
+                  </li>
+                  <li className={navlinkStyle}>
+                    <Link to="/Login">Login</Link>
+                  </li>
+                </ul>
+              )}
             </div>
           </div>
         ) : null}
