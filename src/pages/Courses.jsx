@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import AddCourse from "./AddCourse";
 
 const token = localStorage.getItem("token");
 const id = localStorage.getItem("_id");
@@ -87,58 +88,81 @@ export default function Courses() {
   };
 
   return (
-    <section className="container mx-auto ">
-      <div className="h-screen flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 ">
-      {isAdmin === true &&   <Button>Add Course</Button>}
+    <section className=" h-screen mx-3 my-5 ">
+      <div className="text-center ">
+        {isAdmin === true && (
+          <Button onClick={handleAddCourse}>Add Course</Button>
+        )}
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2">
+        {isAdmin === true
+          ? courses.map((data, i) => (
+              <>
+                <div key={i} className="mx-5 my-5 lg:mt-12">
+                  <div className="mb-5 block  mx-5 p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      {data.name}
+                    </h5>
+                    <p className="font-normal text-gray-700  dark:text-gray-400">
+                      {data.description}
+                    </p>
+                    <div className="text-center flex flex-wrap items-center justify-center ">
+                      <button
+                        className="m-2 px-12 py-2 bg-green-500 rounded-md text-white font-bold w-full"
+                        onClick={editCoursePage}
+                      >
+                        Edit Course
+                      </button>
+                      <button
+                        className="m-2 px-12 py-2 bg-red-500 rounded-md text-white font-bold  w-full"
+                        onClick={handleDeleteCourse}
+                      >
+                        Delete Course
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ))
+          : courses.map((data, i) => (
+              <>
+                <div key={i} className="mx-5 my-5 lg:mt-12">
+                  <div className="mb-5 block  mx-5 p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                      {data.name}
+                    </h5>
+                    <p className="font-normal text-gray-700 dark:text-gray-400">
+                      {data.description}
+                    </p>
+                    <div>
+                      <Button onclick={handleEnrollCourse}>Enroll</Button>
+                    </div>
+                  </div>
+                </div>
+              </>
+            ))}
       </div>
     </section>
   );
 }
 
-{
-  /* <div className="text-center my-5">
-{isAdmin === "true" ? (
-  <>
-    <h1 className="mb-5">Courses Page</h1>
-    <button className="btn btn-primary" onClick={handleAddCourse}>
-      Add Course
-    </button>
-  </>
-) : (
-  <h1>Courses Page</h1>
-)}
-</div>
-<div className="d-flex gap-5 align=items-center justify-content-center m-5 pt-5">
-{courses.map((course, index) => (
-  <Cards
-    key={index}
-    name={course.name}
-    price={course.price}
-    onEnrollCourse={() => handleEnrollCourse(course.name)}
-    editCoursePage={() => editCoursePage(course._id)}
-    onDeleteCourse={() => handleDeleteCourse(course)}
-  />
-))}
-</div> */
-}
-
-{
-  /* <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-        <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
-            Sign in to your account
-          </h1>
-          
-            <button
-              type="submit"
-              className="w-full mt-5 text-white bg-primary-600 bg-blue-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Sign in
-            </button>
-            <p className="text-sm font-light text-gray-800 dark:text-gray-400 text-center mt-5">
-                    Don’t have an account yet? <a href="/register" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
-                </p>
-         
-        </div>
-      </div> */
-}
+// {courses.map((data, i) => (
+//   <>
+//   <div key={i} className="mx-5 my-5 lg:mt-12   ">
+//     <div
+//       href="#"
+//       className="mb-5 block  mx-5 p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700  "
+//     >
+//       <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+//         {data.name}
+//       </h5>
+//       <p className="font-normal text-gray-700 dark:text-gray-400">
+//         {data.description}
+//       </p>
+//       <div className="">
+//         <Button onclick={handleEnrollCourse}>Enroll</Button>
+//       </div>
+//     </div>
+//   </div>
+// </>
+// ))}

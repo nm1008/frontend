@@ -31,7 +31,6 @@ export default function Heading({ theme, handleThemeSwitch }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.clear();
     auth.logout();
     navigate("/");
   };
@@ -43,9 +42,6 @@ export default function Heading({ theme, handleThemeSwitch }) {
   const navlinkStyle =
     "text-black transition-all duration-500 hover:bg-gray-600 hover:text-white hover:text-white px-3 py-2 rounded text-md font-medium dark:text-white";
 
-  const navlinkMobile =
-    "text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium dark:text-white";
-
   return (
     <>
       <nav className="">
@@ -54,7 +50,7 @@ export default function Heading({ theme, handleThemeSwitch }) {
             <div className="flex items-center gap-2 ">
               <img src={logo} alt="logo" className="w-12" />
               <a
-                href="/home"
+                href="/"
                 className="text-black font-semibold dark:text-white dark:font-bolder"
               >
                 Simply Book
@@ -86,7 +82,10 @@ export default function Heading({ theme, handleThemeSwitch }) {
                         <Link to="/">Home</Link>
                       </li>
                       <li className={navlinkStyle}>
-                        <Link to="/Login">Login</Link>
+                        <Link to="/">Login</Link>
+                      </li>
+                      <li className={navlinkStyle}>
+                        <Link to="/Register">Register</Link>
                       </li>
                     </ul>
                   )}
@@ -170,7 +169,10 @@ export default function Heading({ theme, handleThemeSwitch }) {
                     <Link to="/">Home</Link>
                   </li>
                   <li className={navlinkStyle}>
-                    <Link to="/Login">Login</Link>
+                    <Link to="/">Login</Link>
+                  </li>
+                  <li className={navlinkStyle}>
+                    <Link to="/Register">Register</Link>
                   </li>
                 </ul>
               )}

@@ -16,7 +16,7 @@ import EditCourse from "./pages/EditCourse";
 import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./utils/auth";
 import RequireAuth from "../src/utils/RequireAuth";
-import Home from "./pages/Home";
+
 
 function App() {
   //DARK MODE
@@ -51,8 +51,8 @@ function App() {
       <AuthProvider>
         <Heading theme={theme} handleThemeSwitch={handleThemeSwitch} />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+         
+          <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
             path="/EditProfile"
