@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
+import Swal from "sweetalert2";
 
 const isAdmin = localStorage.getItem("isAdmin");
 const token = localStorage.getItem("token");
@@ -28,7 +29,11 @@ export default function AddCourse() {
         }),
       }).then((res) => {
         if (res.ok) {
-          alert("success");
+          Swal.fire({
+            title: "Good job!",
+            text: "You have successfully added a course",
+            icon: "success",
+          });
           navigate("/courses");
         } else {
           alert("Please check the input fields");

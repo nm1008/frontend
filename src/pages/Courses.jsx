@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
-import AddCourse from "./AddCourse";
+import Swal from "sweetalert2";
 
 const token = localStorage.getItem("token");
 const id = localStorage.getItem("_id");
@@ -82,8 +82,15 @@ export default function Courses() {
         .then((res) => res.json())
         .then((data) => {
           if (data) {
-            alert(`${course.name} was deleted`);
-            window.location.reload(false);
+            Swal.fire({
+              title: "Good job!",
+              text: "Course was deleted",
+              icon: "success",
+            });
+            setTimeout(() => {
+              window.location.reload(false);
+            }, 1500)
+           
           } else {
             alert("something went wrong");
           }

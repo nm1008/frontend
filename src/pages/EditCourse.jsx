@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import Button from "../components/Button";
 
 const token = localStorage.getItem("token");
@@ -45,7 +46,11 @@ export default function EditCourse() {
       }),
     }).then((res) => {
       if (res.ok) {
-        alert("Successfully updated course information");
+        Swal.fire({
+          title: "Good job!",
+          text: "You have successfully edited a course",
+          icon: "success",
+        });
         setCourseName("");
         setPrice("");
         setDescription("");

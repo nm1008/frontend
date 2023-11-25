@@ -8,6 +8,8 @@ const RequireAuth = ({ children }) => {
     return <Navigate to="/" />;
   }
 
+
+
   return children;
 };
 
