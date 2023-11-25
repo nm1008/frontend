@@ -46,12 +46,11 @@ function App() {
 
   return (
     <div
-      className={`app h-100 ${theme === "dark" ? "bg-black" : "bg-slate-100"}`}
+      className={`app  ${theme === "dark" ? "bg-black" : "bg-slate-100"}`}
     >
       <AuthProvider>
         <Heading theme={theme} handleThemeSwitch={handleThemeSwitch} />
         <Routes>
-         
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
@@ -95,8 +94,9 @@ function App() {
             }
           />
         </Routes>
-        <Footer />
+      
       </AuthProvider>
+    
     </div>
   );
 }
