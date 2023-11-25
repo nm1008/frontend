@@ -14,14 +14,15 @@ import EditCourse from "./pages/EditCourse";
 
 //ROUTES
 import { Route, Routes } from "react-router-dom";
-import { AuthProvider } from "./components/auth";
-import RequireAuth from "./components/RequireAuth";
+import { AuthProvider } from "./utils/auth";
+import RequireAuth from "../src/utils/RequireAuth";
 import Home from "./pages/Home";
 
 function App() {
   //DARK MODE
   const [theme, setTheme] = useState(null);
 
+  //CHECKS WHAT IS THE DEVICE PREFERRED MODE
   useEffect(() => {
     if (window.matchMedia("prefers-color-scheme: dark").matches) {
       setTheme("dark");

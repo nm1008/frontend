@@ -136,9 +136,9 @@ export default function Register() {
                 />
                 <div className="absolute top-9 right-3">
                   {showPassword1 ? (
-                    <FontAwesomeIcon icon={faEyeSlash} onClick={showPass1} />
-                  ) : (
                     <FontAwesomeIcon icon={faEye} onClick={showPass1} />
+                  ) : (
+                    <FontAwesomeIcon icon={faEyeSlash} onClick={showPass1} />
                   )}
                 </div>
               </div>
@@ -158,9 +158,9 @@ export default function Register() {
                 />
                 <div className="absolute top-9 right-3">
                   {showPassword2 ? (
-                    <FontAwesomeIcon icon={faEyeSlash} onClick={showPass2} />
-                  ) : (
                     <FontAwesomeIcon icon={faEye} onClick={showPass2} />
+                  ) : (
+                    <FontAwesomeIcon icon={faEyeSlash} onClick={showPass2} />
                   )}
                 </div>
               </div>
@@ -186,7 +186,7 @@ export default function Register() {
               <p className="text-sm font-light text-gray-800 dark:text-gray-400 text-center mt-5">
                 Already have an account?{" "}
                 <a
-                  href="/register"
+                  href="/login"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Sign in

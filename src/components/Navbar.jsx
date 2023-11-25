@@ -11,7 +11,7 @@ import {
   faSun,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useAuth } from "./auth";
+import { useAuth } from "../utils/auth";
 
 export default function Heading({ theme, handleThemeSwitch }) {
   const [open, setOpen] = useState(false);
