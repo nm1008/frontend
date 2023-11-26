@@ -21,8 +21,6 @@ export default function ProfilePage() {
   // Get the isAdmin value from localStorage (for admin privilege)
   const isAdmin = localStorage.getItem("isAdmin");
 
-  useEffect(() => {}, []);
-
   useEffect(() => {
     try {
       // Get the user's ID from localStorage
@@ -85,7 +83,9 @@ export default function ProfilePage() {
               </div>
               {isAdmin === "false" && (
                 <div className="flex justify-around gap-2 mb-5 w-full">
-                  <Button onClick={() => handleEditProfile()}>Edit Profile</Button>
+                  <Button onClick={() => handleEditProfile()}>
+                    Edit Profile
+                  </Button>
                 </div>
               )}
             </div>
@@ -104,7 +104,7 @@ export default function ProfilePage() {
                     </h1>
                     {data.enrollees.map((date, i) => (
                       <>
-                        <div className="text-black dark:text-white">
+                        <div key={i} className="text-black dark:text-white">
                           <h3 className="mt-5 text-center">Enrolled date:</h3>
                           <p key={i} className="text-center ">
                             {date.enrolledOn.slice(0, 10)}
@@ -117,7 +117,6 @@ export default function ProfilePage() {
               ))}
           </div>
         </div>
-     
       </section>
     </>
   );

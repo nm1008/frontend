@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const token = localStorage.getItem("token");
 const id = localStorage.getItem("_id");
@@ -13,19 +14,19 @@ export default function Courses() {
 
   const navigate = useNavigate();
 
+  //GETTING ALL COURSES AND SETTING IT TO THE STATE
   useEffect(() => {
     fetch("http://localhost:3000/api/courses")
       .then((res) => res.json())
       .then((data) => setCourses(data));
   }, []);
 
+  //GETTING THE USERS INFORMATION AND SETTING IT TO THE STATE
   useEffect(() => {
-    fetch(`http://localhost:3000/api/users/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setUserEmail(data.email);
-        setIsAdmin(data.isAdmin);
-      });
+    axios.get(`http://localhost:3000/api/users/${id}`).then((res) => {
+      setUserEmail(res.data.email);
+      setIsAdmin(res.data.isAdmin);
+    });
   }, [isAdmin]);
 
   const handleEnrollCourse = (courseName) => {
@@ -43,9 +44,17 @@ export default function Courses() {
       })
         .then((res) => {
           if (res.status === 201) {
-            alert("User enrolled successfully");
+            Swal.fire({
+              title: "Good job!",
+              text: `User was enrolled in ${courseName}`,
+              icon: "success",
+            });
           } else if (res.status === 400) {
-            alert("User is already enrolled in this course");
+            Swal.fire({
+              title: "Hmm??",
+              text: `User was already enrolled in ${courseName}`,
+              icon: "question",
+            });
           } else {
             return;
           }
@@ -73,15 +82,12 @@ export default function Courses() {
     let userConfirmed = confirm("Do you want to delete this course?");
 
     if (userConfirmed) {
-      fetch(`http://localhost:3000/api/courses/${course._id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data) {
+      axios
+        .delete(`http://localhost:3000/api/courses/${course._id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          if (res.request.status === 200) {
             Swal.fire({
               title: "Good job!",
               text: "Course was deleted",
@@ -90,12 +96,9 @@ export default function Courses() {
             setTimeout(() => {
               window.location.reload(false);
             }, 1500);
-          } else {
-            alert("something went wrong");
           }
-        });
-    } else {
-      return;
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -144,7 +147,9 @@ export default function Courses() {
                       </button>
                     </>
                   ) : (
-                    <Button onClick={() => handleEnrollCourse(data.name)}>Enroll</Button>
+                    <Button onClick={() => handleEnrollCourse(data.name)}>
+                      Enroll
+                    </Button>
                   )}
                 </div>
               </div>

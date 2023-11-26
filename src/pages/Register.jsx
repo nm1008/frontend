@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 //FONT AWESOME
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 export default function Register() {
-
   //STATES
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -22,6 +23,15 @@ export default function Register() {
 
   const navigate = useNavigate();
 
+  //AXIOS
+  const data = {
+    firstName: firstName,
+    lastName: lastName,
+    mobileNo: mobileNumber,
+    email: email,
+    password: password,
+  };
+
   const handleRegister = (e) => {
     e.preventDefault();
 
@@ -30,28 +40,28 @@ export default function Register() {
       confirmPassword !== "" &&
       password === confirmPassword
     ) {
-      try {
-        fetch("http://localhost:3000/api/users", {
-          method: "POST",
+      axios
+        .post(`http://localhost:3000/api/users`, data, {
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            firstName: firstName,
-            lastName: lastName,
-            mobileNo: mobileNumber,
-            email: email,
-            password: password,
-          }),
-        }).then((res) => {
-          if (res.ok) {
-            alert("successfully registered");
+        })
+        .then(() => {
+          Swal.fire({
+            title: "Good job!",
+            text: "Account was successfully registered.",
+            icon: "success",
+          });
+          setTimeout(() => {
             navigate("/");
-          }
+          }, 2000);
+        })
+        .catch((err) => {
+          console.log(err);
+          Swal.fire({
+            title: "Uh oh!",
+            text: "Account registration failed.",
+            icon: "error",
+          });
         });
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      alert("Something went wrong");
     }
   };
 
@@ -63,6 +73,12 @@ export default function Register() {
   const showPass2 = () => {
     setShowPassword2(!showPassword2);
   };
+
+  const inputStyle =
+    "bg-gray-50 border  border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
+
+  const labelStyle =
+    "block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-2";
 
   return (
     <section className="container mx-auto ">
@@ -82,24 +98,20 @@ export default function Register() {
             <form onSubmit={handleRegister}>
               <div className="flex gap-2 items-center justify-between">
                 <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    First Name
-                  </label>
+                  <label className={labelStyle}>First Name</label>
                   <input
                     type="text"
-                    className="bg-gray-50 border  border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className={inputStyle}
                     placeholder="John"
                     onChange={(e) => setFirstName(e.target.value)}
                     required
                   />
                 </div>
                 <div>
-                  <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                    Last Name
-                  </label>
+                  <label className={labelStyle}>Last Name</label>
                   <input
                     type="text"
-                    className="bg-gray-50 border mt-2 border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className={`${inputStyle} mt-2`}
                     placeholder="Doe"
                     onChange={(e) => setLastName(e.target.value)}
                     required
@@ -108,12 +120,10 @@ export default function Register() {
               </div>
 
               <div>
-                <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Email Address
-                </label>
+                <label className={labelStyle}>Email Address</label>
                 <input
                   type="email"
-                  className="bg-gray-50 border border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className={inputStyle}
                   placeholder="name@company.com"
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -121,12 +131,10 @@ export default function Register() {
               </div>
 
               <div className="relative">
-                <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Password
-                </label>
+                <label className={labelStyle}>Password</label>
                 <input
                   type={showPassword1 ? "text" : "password"}
-                  className="bg-gray-50 border border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className={inputStyle}
                   placeholder="••••••••"
                   onChange={(e) => setPassword(e.target.value)}
                   minLength={8}
@@ -143,12 +151,10 @@ export default function Register() {
                 </div>
               </div>
               <div className="relative">
-                <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Confirm Password
-                </label>
+                <label className={labelStyle}>Confirm Password</label>
                 <input
                   type={showPassword2 ? "text" : "password"}
-                  className="bg-gray-50 border border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className={inputStyle}
                   placeholder="••••••••"
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   minLength={8}
@@ -165,12 +171,10 @@ export default function Register() {
                 </div>
               </div>
               <div>
-                <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 dark:text-white">
-                  Phone Number
-                </label>
+                <label className={labelStyle}>Phone Number</label>
                 <input
                   type="number"
-                  className="bg-gray-50 border border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className={inputStyle}
                   placeholder="e.g. 8888-888-8888"
                   onChange={(e) => setMobileNumber(e.target.value)}
                   maxLength={11}
