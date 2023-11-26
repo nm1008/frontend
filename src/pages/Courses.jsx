@@ -89,8 +89,7 @@ export default function Courses() {
             });
             setTimeout(() => {
               window.location.reload(false);
-            }, 1500)
-           
+            }, 1500);
           } else {
             alert("something went wrong");
           }
@@ -101,7 +100,7 @@ export default function Courses() {
   };
 
   return (
-    <section className=" h-screen mx-3 my-5 ">
+    <section className=" h-full mx-3 my-5 md:h-screen lg:h-screen">
       <div className="text-center ">
         {isAdmin === true && (
           <button
@@ -145,7 +144,7 @@ export default function Courses() {
                       </button>
                     </>
                   ) : (
-                    <Button onClick={handleEnrollCourse}>Enroll</Button>
+                    <Button onClick={() => handleEnrollCourse(data.name)}>Enroll</Button>
                   )}
                 </div>
               </div>
