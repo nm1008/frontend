@@ -90,6 +90,7 @@ export default function ProfilePage() {
               )}
             </div>
           </div>
+          {/* Display user enrolled courses */}
           <div className="flex">
             {isAdmin === "false" &&
               courses.map((data, i) => (
@@ -116,89 +117,8 @@ export default function ProfilePage() {
               ))}
           </div>
         </div>
-        {/* Display user enrolled courses */}
+     
       </section>
     </>
   );
-}
-// {isAdmin === "false" && (
-//   // Display enrolled courses for non-admin users
-//   <>
-//     <h2 className="text-center mt-5">Enrolled courses</h2>
-//     <div className="d-flex justify-content-center gap-3 col-12 col-md-6 col-sm-6 m-auto ">
-//       {/* Map the user's enrolled courses and render CardCourse components */
-// }
-// //         {courses.map((course, index) => (
-// //           <CardCourse key={index} name={course.name} />
-// //         ))}
-// //       </div>
-// //     </>
-
-{
-  /* <Container className="mt-5 pt-5">
-<Row>
-  <div className="col-12 col-md-7 col-sm-12 m-auto">
-    <div className="card border-0 shadow">
-      <div className="card-body">
-        <h5>Information</h5>
-        <hr />
-        {isLoading ? (
-          // Display loading spinner while data is being fetched
-          <div className="d-flex justify-content-center align-items-center">
-            <TailSpin
-              height="80"
-              width="80"
-              color="#4fa94d"
-              ariaLabel="tail-spin-loading"
-              radius="1"
-              wrapperStyle={{}}
-              wrapperClass=""
-              visible={true}
-            />
-          </div>
-        ) : (
-          // Display user information when data is loaded
-          <>
-            <Row>
-              <Col>
-                <h6>Name</h6>
-                <p>
-                  {firstName} {lastName}
-                </p>
-              </Col>
-              <Col>
-                <h6>Phone Number</h6>
-                <p>{mobileNumber}</p>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <h6>Email Address</h6>
-                <p>{email}</p>
-              </Col>
-              <Col className="d-flex align-items-center">
-                {isAdmin === "false" && (
-                  // Display an "Edit Profile" button for non-admin users
-                  <button
-                    className="btn btn-primary"
-                    onClick={handleEditProfile}
-                  >
-                    Edit Profile
-                  </button>
-                )}
-              </Col>
-            </Row>
-          </>
-        )}
-      </div>
-    </div>
-  </div>
-</Row>
-</Container>
-<Container>
-<Row>
-
-//   )}
-// </Row>
-// </Container> */
 }

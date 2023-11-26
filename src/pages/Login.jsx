@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../utils/auth";
+
 import logo from "../assets/logo.png";
 import Button from "../components/Button";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -11,7 +14,11 @@ export default function Login() {
   const navigate = useNavigate();
   const auth = useAuth();
 
-
+  //AXIOS
+  const data = {
+    email: email,
+    password: password,
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -19,46 +26,43 @@ export default function Login() {
     //Checks the user input
     if (email === "" || password === "") {
       alert("Please input your email and/or password.");
-    } else {
-      fetch("http://localhost:3000/api/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.accessToken) {
-            localStorage.setItem("token", data.accessToken);
-            auth.login(data.accessToken);
-
-            fetch("http://localhost:3000/api/users/details", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                email: email,
-              }),
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                localStorage.setItem("isAdmin", data.isAdmin);
-                localStorage.setItem("_id", data._id);
-
-                navigate("/courses");
-              })
-              .catch((error) => {
-                alert("Error fetching user details: " + error.message);
-              });
-          } else {
-            alert("Login Failed. Something went wrong");
-          }
-        })
-        .catch(() => {
-          alert("Incorrect details");
-        });
     }
+    axios
+      .post(`http://localhost:3000/api/users/login`, data, {
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((res) => {
+        if (res.data.accessToken) {
+          localStorage.setItem("token", res.data.accessToken);
+          auth.login(res.data.accessToken);
+
+          axios
+            .post(
+              `http://localhost:3000/api/users/details`,
+              { email: email },
+              {
+                headers: { "Content-Type": "application/json" },
+              }
+            )
+            .then((res) => {
+              localStorage.setItem("isAdmin", res.data.isAdmin);
+              localStorage.setItem("_id", res.data._id);
+              Swal.fire({
+                title: "Hooray!",
+                text: "User has logged in successfully",
+                icon: "success",
+              });
+              navigate("/courses");
+            });
+        } else {
+          Swal.fire({
+            title: "Uh oh!",
+            text: "Please check your credentials",
+            icon: "error",
+          });
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

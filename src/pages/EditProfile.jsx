@@ -2,66 +2,63 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Swal from "sweetalert2";
-import axios from 'axios'
+import axios from "axios";
 
 export default function EditProfile() {
-  
+  //LOCAL STORAGE
   const token = localStorage.getItem("token");
   const isAdmin = localStorage.getItem("isAdmin");
-  const id = localStorage.getItem("_id")
-  console.log(id)
+  const id = localStorage.getItem("_id");
 
+  //STATES
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
 
+  //NAVIGATE
   const navigate = useNavigate();
 
+  //AXIOS
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${token}`,
+  };
+
+  const data = {
+    firstName: firstName,
+    lastName: lastName,
+    mobileNo: mobileNumber,
+  };
+
+  //GETTING THE DETAILS OF THE USER
   useEffect(() => {
-    axios.get(`http://localhost:3000/api/users/${id}`)
-    .then((res) => {
-      setFirstName(res.data.firstName)
-      setLastName(res.data.lastName)
-      setMobileNumber(res.data.mobileNo)
-    })
+    axios.get(`http://localhost:3000/api/users/${id}`).then((res) => {
+      setFirstName(res.data.firstName);
+      setLastName(res.data.lastName);
+      setMobileNumber(res.data.mobileNo);
+    });
+  }, [id]);
 
-  }, [])
-
-  const handleEditUser = (e) => {
+  const handleEditUser = async (e) => {
     e.preventDefault();
-   
-    try {
-      if (token) {
-        fetch(`http://localhost:3000/api/users/${id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            firstName: firstName,
-            lastName: lastName,
-            mobileNo: mobileNumber,
-          }),
-        }).then((res) => {
-          if (res.ok) {
-            Swal.fire({
-              title: "Good job!",
-              text: "You have successfully edited your profile",
-              icon: "success",
-            });
-            setFirstName("");
-            setLastName("");
-            setMobileNumber("");
-            navigate("/ProfilePage");
-          }
-        });
-      } else {
-        navigate("/login");
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    axios
+      .put(`http://localhost:3000/api/users/${id}`, data, {
+        headers: headers,
+      })
+      .then((res) => {
+        if (res.data) {
+          Swal.fire({
+            title: "Good job!",
+            text: "You have successfully edited your profile",
+            icon: "success",
+          });
+          setFirstName("");
+          setLastName("");
+          setMobileNumber("");
+          navigate("/ProfilePage");
+        }
+      })
+      .catch((error) => console.error(error));
   };
 
   return (
@@ -106,7 +103,7 @@ export default function EditProfile() {
                   </div>
                   <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                     Mobile Number
+                      Mobile Number
                     </label>
                     <input
                       type="number"
@@ -128,58 +125,3 @@ export default function EditProfile() {
     </>
   );
 }
-
-// {isAdmin === "true" ? (
-//
-// ) : (
-//   <Container className="my-5 py-5">
-//     <Row>
-//       <div className="col-12 col-md-7 col-sm-12 m-auto">
-//         <div className="card border-0 shadow">
-//           <div className="card-body">
-//             <h1 className="text-center">EditProfile</h1>
-//             <hr />
-//             <Form className="d-flex gap-3 flex-column" onSubmit={handleEditUser}>
-//               <Row>
-//                 <Col>
-//                   <Form.Group>
-//                     <Form.Label>First name</Form.Label>
-//                     <Form.Control
-//                       type="text"
-//                       className="form-control"
-//                       placeholder="Enter your first name"
-//                       onChange={(e) => setFirstName(e.target.value)}
-//                     />
-//                   </Form.Group>
-//                 </Col>
-//                 <Col>
-//                   <Form.Group>
-//                     <Form.Label>Last name</Form.Label>
-//                     <Form.Control
-//                       type="text"
-//                       className="form-control"
-//                       placeholder="Enter your last name"
-//                       onChange={(e) => setLastName(e.target.value)}
-//                     />
-//                   </Form.Group>
-//                 </Col>
-//               </Row>
-//               <Form.Group>
-//                 <Form.Label>Mobile number</Form.Label>
-//                 <Form.Control
-//                   type="text"
-//                   className="form-control"
-//                   placeholder="Enter your mobile number"
-//                   maxLength={11}
-//                   minLength={11}
-//                   onChange={(e) => setMobileNumber(e.target.value)}
-//                 />
-//               </Form.Group>
-//               <button className="btn btn-primary">Save Changes</button>
-//             </Form>
-//           </div>
-//         </div>
-//       </div>
-//     </Row>
-//   </Container>
-// )}
