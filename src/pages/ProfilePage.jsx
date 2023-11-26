@@ -27,7 +27,6 @@ export default function ProfilePage() {
     try {
       // Get the user's ID from localStorage
       const id = localStorage.getItem("_id");
-      console.log(id)
 
       // Fetch user data by their ID
       fetch(`http://localhost:3000/api/users/${id}`)
@@ -38,7 +37,6 @@ export default function ProfilePage() {
           setLastName(data.lastName);
           setMobileNumber(data.mobileNo);
           setEmail(data.email);
-          
 
           // Fetch enrolled courses data by their IDs
           const coursePromises = data.enrollments.map((course) => {
@@ -48,8 +46,7 @@ export default function ProfilePage() {
           });
 
           // Use Promise.all to handle multiple course data fetches
-          Promise.all(coursePromises).then((courseData) => { 
-            console.log(courseData)
+          Promise.all(coursePromises).then((courseData) => {
             setCourses(courseData); // Set the user's enrolled courses
           });
 
@@ -69,8 +66,8 @@ export default function ProfilePage() {
   return (
     <>
       <section className="container mx-auto">
-        <div className="h-screen flex flex-col items-center mt-20 px-6 py-8 mx-auto md:h-screen lg:py-0 ">
-          <div className="w-full h-auto bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <div className=" flex flex-col items-center mt-20 px-6 py-8 mx-auto md:h-screen lg:py-0 ">
+          <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8 dark:text-white">
               <div className="flex gap-3 justify-center items-center text-md lg:text-lg ">
                 <h1 className=" font-bold">Name: </h1>
@@ -88,17 +85,38 @@ export default function ProfilePage() {
               </div>
               {isAdmin === "false" && (
                 <div className="flex justify-around gap-2 mb-5 w-full">
-                  <Button onClick={handleEditProfile}>Edit Profile</Button>
+                  <Button onClick={() => handleEditProfile()}>Edit Profile</Button>
                 </div>
               )}
             </div>
           </div>
-          {/* Display user enrolled courses */}
-          {isAdmin === "true" && (
-          console.log(courses)
-          )}
-         
+          <div className="flex">
+            {isAdmin === "false" &&
+              courses.map((data, i) => (
+                <>
+                  <section
+                    key={i}
+                    className="h-48 w-64 my-16 mx-5 bg-white rounded-lg shadow dark:border  dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                  >
+                    <h1 className="mt-5 font-bold text-md text-center">
+                      {data.name}
+                    </h1>
+                    {data.enrollees.map((date, i) => (
+                      <>
+                        <div className="text-black dark:text-white">
+                          <h3 className="mt-5 text-center">Enrolled date:</h3>
+                          <p key={i} className="text-center ">
+                            {date.enrolledOn.slice(0, 10)}
+                          </p>
+                        </div>
+                      </>
+                    ))}
+                  </section>
+                </>
+              ))}
+          </div>
         </div>
+        {/* Display user enrolled courses */}
       </section>
     </>
   );
@@ -182,4 +200,5 @@ export default function ProfilePage() {
 
 //   )}
 // </Row>
-// </Container> */}
+// </Container> */
+}
