@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 
 const token = localStorage.getItem("token");
-const id = localStorage.getItem("_id");
+
 
 export default function Courses() {
   const [courses, setCourses] = useState([]);
@@ -23,6 +23,7 @@ export default function Courses() {
 
   //GETTING THE USERS INFORMATION AND SETTING IT TO THE STATE
   useEffect(() => {
+    const id = localStorage.getItem("_id");
     axios.get(`http://localhost:3000/api/users/${id}`).then((res) => {
       setUserEmail(res.data.email);
       setIsAdmin(res.data.isAdmin);
@@ -131,7 +132,7 @@ export default function Courses() {
                   </p>
                 )}
                 <div className="text-center flex flex-wrap items-center justify-center ">
-                  {isAdmin === true ? (
+                  {isAdmin === true && (
                     <>
                       <button
                         className="m-2 px-12 py-2 bg-green-500 rounded-md text-white font-bold w-full"
@@ -146,7 +147,8 @@ export default function Courses() {
                         Delete Course
                       </button>
                     </>
-                  ) : (
+                  )}
+                  {isAdmin === false && (
                     <Button onClick={() => handleEnrollCourse(data.name)}>
                       Enroll
                     </Button>

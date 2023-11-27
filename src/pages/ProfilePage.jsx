@@ -1,8 +1,6 @@
 //Imports
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TailSpin } from "react-loader-spinner";
-import CardCourse from "../components/CardCourse";
 import Button from "../components/Button";
 
 export default function ProfilePage() {
