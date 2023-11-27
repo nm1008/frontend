@@ -16,6 +16,7 @@ import EditCourse from "./pages/EditCourse";
 import { Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./utils/auth";
 import RequireAuth from "../src/utils/RequireAuth";
+import Sample from "./pages/sample";
 
 
 function App() {
@@ -93,10 +94,11 @@ function App() {
               </RequireAuth>
             }
           />
+          <Route path="/Sample" element={<Sample />} />
         </Routes>
       
       </AuthProvider>
-    
+           
     </div>
   );
 }
