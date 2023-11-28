@@ -5,7 +5,7 @@ import "./App.css";
 import Heading from "./components/Navbar";
 import Courses from "./pages/Courses/Courses";
 import Login from "./pages/Login/Login";
-import Register from "./pages/Register";
+import Register from "../src/pages/Register/Register";
 import EditProfile from "./pages/Profile/EditProfile";
 import ProfilePage from "./pages/Profile/ProfilePage";
 import AddCourse from "./pages/Courses/AddCourse";
