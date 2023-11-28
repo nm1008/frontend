@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 
 const token = localStorage.getItem("token");
 const isAdmin = localStorage.getItem("isAdmin");
@@ -81,8 +81,7 @@ export default function EditCourse() {
                       placeholder="Javascript"
                       value={courseName}
                       onChange={(e) => setCourseName(e.target.value)}
-                      maxLength={30}
-                    />
+                      maxLength={30} />
                   </div>
                   <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -94,8 +93,7 @@ export default function EditCourse() {
                       placeholder="JavaScript is a versatile programming language."
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
-                      maxLength={50}
-                    />
+                      maxLength={50} />
                   </div>
                   <div>
                     <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -106,8 +104,7 @@ export default function EditCourse() {
                       className="bg-gray-50 border border-black text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="69"
                       value={price}
-                      onChange={(e) => setPrice(e.target.value)}
-                    />
+                      onChange={(e) => setPrice(e.target.value)} />
                   </div>
 
                   <div className="flex gap-5 justify-center ">

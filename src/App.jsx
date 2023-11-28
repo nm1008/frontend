@@ -3,14 +3,13 @@ import "./App.css";
 
 //COMPONENTS
 import Heading from "./components/Navbar";
-import Courses from "./pages/Courses";
-import Login from "./pages/Login";
+import Courses from "./pages/Courses/Courses";
+import Login from "./pages/Login/Login";
 import Register from "./pages/Register";
-import EditProfile from "./pages/EditProfile";
-import Footer from "./components/Footer";
-import ProfilePage from "./pages/ProfilePage";
-import AddCourse from "./pages/AddCourse";
-import EditCourse from "./pages/EditCourse";
+import EditProfile from "./pages/Profile/EditProfile";
+import ProfilePage from "./pages/Profile/ProfilePage";
+import AddCourse from "./pages/Courses/AddCourse";
+import EditCourse from "./pages/Courses/EditCourse";
 
 //ROUTES
 import { Route, Routes } from "react-router-dom";

@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 import Swal from "sweetalert2";
 import axios from "axios";
 
 const token = localStorage.getItem("token");
-
 
 export default function Courses() {
   const [courses, setCourses] = useState([]);
@@ -31,6 +30,7 @@ export default function Courses() {
   }, [isAdmin]);
 
   const handleEnrollCourse = (courseName) => {
+
     try {
       fetch(`http://localhost:3000/api/users/enroll`, {
         method: "POST",

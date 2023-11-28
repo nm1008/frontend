@@ -1,7 +1,7 @@
 //Imports
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 
 export default function ProfilePage() {
   // States to store user information
@@ -10,8 +10,6 @@ export default function ProfilePage() {
   const [mobileNumber, setMobileNumber] = useState("");
   const [email, setEmail] = useState("");
   const [courses, setCourses] = useState([]); // Stores the user's enrolled courses
-
-  const [isLoading, setIsLoading] = useState(true); // Indicates if data is loading
 
   // Navigate function from react-router-dom
   const navigate = useNavigate();
@@ -45,9 +43,7 @@ export default function ProfilePage() {
           Promise.all(coursePromises).then((courseData) => {
             setCourses(courseData); // Set the user's enrolled courses
           });
-
-          // Set isLoading to false after fetching data
-          setIsLoading(false);
+        
         });
     } catch (err) {
       console.log(err);
@@ -92,26 +88,24 @@ export default function ProfilePage() {
           <div className="flex">
             {isAdmin === "false" &&
               courses.map((data, i) => (
-                <>
-                  <section
-                    key={i}
-                    className="h-48 w-64 my-16 mx-5 bg-white rounded-lg shadow dark:border  dark:bg-gray-800 dark:border-gray-700 dark:text-white"
-                  >
-                    <h1 className="mt-5 font-bold text-md text-center">
-                      {data.name}
-                    </h1>
-                    {data.enrollees.map((date, i) => (
-                      <>
-                        <div key={i} className="text-black dark:text-white">
-                          <h3 className="mt-5 text-center">Enrolled date:</h3>
-                          <p key={i} className="text-center ">
-                            {date.enrolledOn.slice(0, 10)}
-                          </p>
-                        </div>
-                      </>
-                    ))}
-                  </section>
-                </>
+                <section
+                  key={i}
+                  className="h-48 w-64 my-16 mx-5 bg-white rounded-lg shadow dark:border  dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                >
+                  <h1 className="mt-5 font-bold text-md text-center">
+                    {data.name}
+                  </h1>
+                  {data.enrollees.map((date, i) => (
+                    <>
+                      <div key={i} className="text-black dark:text-white">
+                        <h3 className="mt-5 text-center">Enrolled date:</h3>
+                        <p className="text-center ">
+                          {date.enrolledOn.slice(0, 10)}
+                        </p>
+                      </div>
+                    </>
+                  ))}
+                </section>
               ))}
           </div>
         </div>

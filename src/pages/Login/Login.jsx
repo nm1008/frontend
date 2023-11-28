@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../utils/auth";
+import { useAuth } from "../../utils/auth";
 
-import logo from "../assets/logo.png";
-import Button from "../components/Button";
+import logo from "../../assets/logo.png";
+import Button from "../../components/Button";
 import axios from "axios";
 import Swal from "sweetalert2";
 
